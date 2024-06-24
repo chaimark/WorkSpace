@@ -1,7 +1,4 @@
 *.EDZ
-*.DXF
-*.lib
-*.dwg
 *.dep
 *.Bak
 *.scvd
@@ -40,7 +37,6 @@
 *.zip
 *.rar
 *.pdf
-*.PcbDoc
 *.log
 *.iex
 *.Lenovo
