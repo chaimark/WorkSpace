@@ -1,26 +1,48 @@
 @echo off
-git rm --cached *.zip
-git rm --cached *.log
-git rm --cached *.o
-git rm --cached *.choulei
-git rm --cached *.Leige
-git rm --cached *.uvoptx
-git rm --cached *.uvprojx
-git rm --cached *.dep
-git rm --cached *.bak
-git rm --cached *.Bak
-git rm --cached *.scvd
-git rm --cached *.txt
-git rm --cached *.ini
-git rm --cached *.crf
-git rm --cached *.d
-git rm --cached *.axf
-git rm --cached *.html
-git rm --cached *.hex
-git rm --cached *.htm
-git rm --cached *.lib
-git rm --cached *.lnp
-git rm --cached *.sct
-git rm --cached *.__i
-git rm --cached *.map
-git rm --cached *.lst
+
+git rm -rf --cached *.EDZ
+git rm -rf --cached *.DXF
+git rm -rf --cached *.lib
+git rm -rf --cached *.dwg
+git rm -rf --cached *.dep
+git rm -rf --cached *.Bak
+git rm -rf --cached *.scvd
+git rm -rf --cached *.txt
+git rm -rf --cached *.ini
+git rm -rf --cached *.crf
+git rm -rf --cached *.lst
+git rm -rf --cached *.map
+git rm -rf --cached *._ia
+git rm -rf --cached *.__i
+git rm -rf --cached *.ld
+git rm -rf --cached *.o
+git rm -rf --cached *.choulei
+git rm -rf --cached *.Leige
+git rm -rf --cached *.uvoptx
+git rm -rf --cached *.uvprojx
+git rm -rf --cached *.dep
+git rm -rf --cached *.bak
+git rm -rf --cached *.Bak
+git rm -rf --cached *.scvd
+git rm -rf --cached *.txt
+git rm -rf --cached *.ini
+git rm -rf --cached *.crf
+git rm -rf --cached *.d
+git rm -rf --cached *.axf
+git rm -rf --cached *.html
+git rm -rf --cached *.hex
+git rm -rf --cached *.htm
+git rm -rf --cached *.lib
+git rm -rf --cached *.lnp
+git rm -rf --cached *.sct
+git rm -rf --cached *.map
+git rm -rf --cached *.lst
+git rm -rf --cached *.lock
+git rm -rf --cached *.yml
+git rm -rf --cached *.zip
+git rm -rf --cached *.rar
+git rm -rf --cached *.pdf
+git rm -rf --cached *.PcbDoc
+git rm -rf --cached *.log
+git rm -rf --cached *.iex
+git rm -rf --cached *.Lenovo

@@ -1,3 +1,15 @@
+*.EDZ
+*.DXF
+*.lib
+*.dwg
+*.dep
+*.Bak
+*.scvd
+*.txt
+*.ini
+*.crf
+*.lst
+*.map
 *._ia
 *.__i
 *.ld
@@ -5,6 +17,7 @@
 *.choulei
 *.Leige
 *.uvoptx
+*.uvprojx
 *.dep
 *.bak
 *.Bak
@@ -29,11 +42,5 @@
 *.pdf
 *.PcbDoc
 *.log
-*.uvprojx
 *.iex
 *.Lenovo
-*.EDZ
-*.DXF
-*.lib
-*.dwg
-
