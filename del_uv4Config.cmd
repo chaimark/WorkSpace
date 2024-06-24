@@ -37,7 +37,6 @@ git rm -rf --cached *.lock
 git rm -rf --cached *.yml
 git rm -rf --cached *.zip
 git rm -rf --cached *.rar
-git rm -rf --cached *.pdf
 git rm -rf --cached *.log
 git rm -rf --cached *.iex
 git rm -rf --cached *.Lenovo
