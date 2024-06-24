@@ -1,9 +1,6 @@
 @echo off
 
 git rm -rf --cached *.EDZ
-git rm -rf --cached *.DXF
-git rm -rf --cached *.lib
-git rm -rf --cached *.dwg
 git rm -rf --cached *.dep
 git rm -rf --cached *.Bak
 git rm -rf --cached *.scvd
@@ -32,7 +29,6 @@ git rm -rf --cached *.axf
 git rm -rf --cached *.html
 git rm -rf --cached *.hex
 git rm -rf --cached *.htm
-git rm -rf --cached *.lib
 git rm -rf --cached *.lnp
 git rm -rf --cached *.sct
 git rm -rf --cached *.map
@@ -42,7 +38,6 @@ git rm -rf --cached *.yml
 git rm -rf --cached *.zip
 git rm -rf --cached *.rar
 git rm -rf --cached *.pdf
-git rm -rf --cached *.PcbDoc
 git rm -rf --cached *.log
 git rm -rf --cached *.iex
 git rm -rf --cached *.Lenovo

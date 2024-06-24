@@ -27,7 +27,6 @@
 *.html
 *.hex
 *.htm
-*.lib
 *.lnp
 *.sct
 *.map
