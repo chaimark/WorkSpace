@@ -33,3 +33,7 @@
 *.iex
 *.Lenovo
 *.EDZ
+*.DXF
+*.lib
+*.dwg
+
