@@ -37,6 +37,9 @@
 *.log
 *.iex
 *.Lenovo
+!a.cfg
+!AT指令顺序.txt
+!报文.txt
 !M0_WebPage-20240416150814.rar
 !PCB library file.zip
 EthernetTool_V1.3.4.zip
