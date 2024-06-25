@@ -64,5 +64,5 @@ extern jsoncode New_Json_Obj(void); // 建立对象的函数
 extern _JsonWifi_DeviceArgument getDeviceArgumentDATA(void);
 extern void pushDeviceArgJson(uint16_t *Len, uint8_t *DataBuff);
 extern int setJavaTaskMain(void);
-
+extern int catJsonDataToString(strnew OutString, char * jsonKey, char * jsonForm, void * Data);
 #endif

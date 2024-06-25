@@ -1,4 +1,4 @@
-#include <stdarg.h>
+#include <stdio.h>
 #include "HtmlCode.h"
 #include "JsonApp.h"
 #include "WifiTask.h"
@@ -6,22 +6,49 @@
 #include "../Src/protocol.h"
 #include "RunComputerCmd.h"
 
-
-int catJsonDataToString(strnew OutString, char * jsonKey, char * jsonForm, void * Data);
-
+// 输入关键字和值，增加一条 json 数据
 int catJsonDataToString(strnew OutString, char * jsonKey, char * jsonForm, void * Data) {
     int NowLenOutStr = strlen(OutString.Name._char);
     if (NowLenOutStr > OutString.MaxLen) {
         return -1;
     }
-    if (strcmp(jsonForm, "%d")) {
-        sprintf(&OutString.Name._char[NowLenOutStr-1], ",%s: %d}", jsonKey, (*(int *)Data));
-    }
-    if (strcmp(jsonForm, "%s")) {
-        sprintf(&OutString.Name._char[NowLenOutStr-1], ",%s: %d}", jsonKey, (*(char *)Data));
-    }
+    /*%d %o %x %u %c %s %f %e %g*/
+    enum _FromFlag {
+        _INT_Dex,
+        _INT_Oex,
+        _INT_Hex,
+        _UINT_Dex,
+        _Char_Ch,
+        _Char_Str,
+        _Float,
+        _Ee,
+        _Gg,
+    } FromFlag;
 
-    return 0;
+    char FromStr[10] = {",%s: "};
+    catString(FromStr, jsonForm, 10, strlen(jsonForm));
+    catString(FromStr, "}", 10, strlen(jsonForm));
+    switch (FromFlag) {
+        case _INT_Dex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(int *)Data));
+            break;
+        case _INT_Oex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(int *)Data));
+            break;
+        case _INT_Hex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(int *)Data));
+            break;
+        case _UINT_Dex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(unsigned int *)Data));
+            break;
+        case _Char_Ch:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(char *)Data));
+            break;
+        case _Char_Str:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(char *)Data));
+            break;
+        case _Float:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(float *)Data));
+            break;
+        case _Ee:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(double *)Data));
+            break;
+        case _Gg:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(double *)Data));
+            break;
+    }
+    return strlen(OutString.Name._char);
 }
 
 // wifi 外部参数接口
