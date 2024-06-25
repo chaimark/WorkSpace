@@ -12,8 +12,7 @@ xxxxx_xxxx <==> typedef(数据类型)
 #include <stdint.h>
 #include "StrLib.h"
 
-// int ASCIIToHEX2(char *asc, char *hex, unsigned char len);	// 外用接口 双字符串 转 单数组串 0x31 0x32 ==> 0x12
-// void HEX2ToASCII(char *hex, unsigned char len, char *asc);	// 外用接口 单数组串 转 双字符串 0x12 ==> 0x31 0x32
+
 extern void numberArrayToStrArray(char StrArray[], char NumberArray[], int ArrayMinLen);								   // 将数组串转字符串 0x01 0x02 ==> 0x31 0x32
 extern void strArrayToNumberArray(char NumberArray[], char StrArray[], int ArrayMinLen);								   // 将字符串转数组串 0x31 0x32 ==> 0x01 0x02
 extern uint64_t anyBaseToAnyBase(uint64_t Number, int IntputBase, int OutputBase);										   // 任意进制互转
@@ -24,4 +23,7 @@ extern int doubleChStrToShortChStr(strnew inputArray, strnew OutputArray);						
 extern int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, int OutputBase);							   // 字符串 转 任意进制数
 extern int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase);					   // 任意进制数 转 字符串
 
+// 外部接口
+//extern int ASCIIToHEX2(char *asc, char *hex, unsigned char len);	// 外用接口 双字符串 转 单数组串 0x31 0x32 ==> 0x12
+extern void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len);
 #endif

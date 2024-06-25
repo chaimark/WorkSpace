@@ -33,7 +33,7 @@ typedef struct Wifi_Argument
 	strnew Touch_Data;
 	uint32_t needSendJsonDataFlagBit;
 
-	char ArgumentStrbuff[500];								  // json参数越多，需要的空间就越大
+	char ArgumentStrbuff[512];								  // json参数越多，需要的空间就越大
 	void (*getJsonForWifiDataStr)(struct Wifi_Argument This); // 将数据整理成json字符串
 } _JsonWifi_DeviceArgument;
 // 类方法
@@ -64,6 +64,5 @@ extern jsoncode New_Json_Obj(void); // 建立对象的函数
 extern _JsonWifi_DeviceArgument getDeviceArgumentDATA(void);
 extern void pushDeviceArgJson(uint16_t *Len, uint8_t *DataBuff);
 extern int setJavaTaskMain(void);
-
 
 #endif

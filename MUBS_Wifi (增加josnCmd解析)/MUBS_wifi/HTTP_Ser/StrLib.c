@@ -1,20 +1,18 @@
 #include "StrLib.h"
+#include "../Src/Uart.h"
 
 /*-----------------------------------函数说明----------------------------------*/
 int catString(char *OutStr, char *IntStr, int MaxSize, int IntSize);
 bool copyString(char *OutStr, char *IntStr, int MaxSize, int IntSize);
 char *myStrstr(char *MotherStr, char *SonStr, int MotherMaxSize);
 char *myStrstrCont(char *MotherStr, char *SonStr, int MotherMaxSize, int ContNum);
-bool isFoundStr(char MotherBuff[], char SonBuff[], int MotherBuffLen, int RunTime);
+bool isFoundStr(char * MotherStr, char * SonStr, int MaxSize, int RunTimeMS);
 void swapChr(char *a, char *b);
 void swapStr(char *IntputStr, int StrLen);
 char swapLowHight_Of_Char(char InputCh);
-int AsciiToHEX2(strnew inputAscii, strnew OutputHex);
-void HEX2ToAscii(strnew inputHex, strnew OutputAscii);
+
 // 外部接口
 
-int ASCIIToHEX2(char *asc, char *hex, unsigned char len);
-void HEX2ToASCII(char *hex, unsigned char len, char *asc);
 /*******************************************************************************************************************/
 /*******************************************************************************************************************/
 /*******************************************************************************************************************/
@@ -167,23 +165,19 @@ char *myStrstrCont(char *MotherStr, char *SonStr, int MotherMaxSize, int ContNum
 	return p_star;
 }
 
-// 查询是否存在字串
-bool isFoundStr(char MotherBuff[], char SonBuff[], int MotherBuffLen, int RunTime)
+
+// 查找返回是否存在字串
+bool isFoundStr(char * MotherStr, char * SonStr, int MaxSize, int RunTimeMS)
 {
-	return true;
+	char *p_star = NULL;
+	for (int i = 0; i < RunTimeMS; i++)
+	{
+		if ((p_star = myStrstr(MotherStr, SonStr, MaxSize)) != NULL) // 假设查询一次100ms
+			break;
+		copyDataForUART();
+	}
+	return ((p_star == NULL) ? 0 : 1);
 }
-//// 查找返回是否存在字串
-// int isFoundStr(char *MotherStr, char *SonStr, int MaxSize, int RunTimeMS)
-//{
-//	char *p_star = NULL;
-//	for (int i = 0; i < RunTimeMS; i++)
-//	{
-//		if ((p_star = myStrstr(MotherStr, SonStr, MaxSize)) != NULL) // 假设查询一次100ms
-//			break;
-//		copyDataForUART();
-//	}
-//	return ((p_star == NULL) ? 0 : 1);
-// }
 //  交换两个字符
 void swapChr(char *a, char *b)
 {

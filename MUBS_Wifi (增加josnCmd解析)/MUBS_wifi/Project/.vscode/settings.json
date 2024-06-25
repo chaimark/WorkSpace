@@ -1,6 +1,7 @@
 {
 	"files.associations": {
-		"protocol.h": "c",
-		"wifitask.h": "c"
-	}
+        "protocol.h": "c",
+        "wifitask.h": "c",
+        "strlib.h": "c"
+    }
 }

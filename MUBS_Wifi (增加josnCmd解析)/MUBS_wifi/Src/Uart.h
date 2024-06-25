@@ -13,5 +13,6 @@ typedef struct{
 	uint16_t RxLen;	//待接收数据长度
 	uint16_t RxOpc;	//已接收数据长度
 }UARTOpStruct;
+extern void copyDataForUART(void);
 
 #endif
