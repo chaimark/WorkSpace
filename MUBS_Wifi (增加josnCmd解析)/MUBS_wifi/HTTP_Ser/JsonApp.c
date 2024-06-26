@@ -29,10 +29,8 @@ int catJsonDataToString(strnew OutString, char * jsonKey, char * jsonForm, void 
     catString(FromStr, jsonForm, 10, strlen(jsonForm));
     catString(FromStr, "}", 10, strlen(jsonForm));
     switch (FromFlag) {
-        case _INT_Dex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(int *)Data));
-            break;
-        case _INT_Oex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(int *)Data));
-            break;
+        case _INT_Dex:
+        case _INT_Oex:
         case _INT_Hex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(int *)Data));
             break;
         case _UINT_Dex:sprintf(&OutString.Name._char[NowLenOutStr - 1], FromStr, jsonKey, (*(unsigned int *)Data));
