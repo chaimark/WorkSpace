@@ -8,9 +8,8 @@
 #define sendDataByNetProt Uart0Send // Uart0Send(unsigned char *, unsigned short int)
 
 // 所有 AT指令 《发送时》 需要的用于 《组织指令》 的函数名
-typedef enum _SendFun
-{                                      // 发送AT指令时调用什么函数发送，对应的函数名
-    flagChangeUartIDFun = 0,              // 控制修改 AT 指令需要的串口号
+typedef enum _SendFun {                                      // 发送AT指令时调用什么函数发送，对应的函数名
+    flagChangeUartIDFun = 0,           // 控制修改 AT 指令需要的串口号
     easyATCmdDataLoadFun = 1,          // 简单AT 指令装载
     setBandDataLoadFun = 2,            // 波特率装载设置
     setWannDataLoadFun = 3,            // 网口设置指令装载
@@ -21,20 +20,18 @@ typedef enum _SendFun
 } SendFun;
 
 // 所有 AT指令 《回复时》 需要的用于 《处理回复》 的函数名
-typedef enum _receiveFun
-{                              // 发送AT指令时调用什么函数发送，对应的函数名
+typedef enum _receiveFun {                              // 发送AT指令时调用什么函数发送，对应的函数名
     ResetTrueFlagDoingFun = 0, // 作为特殊标记，用于忽略模组返回强制跳过某条指令
     easyATCmdDataDoingFun = 1, // 简单AT 指令处理
     ReBootDevFun = 2,          // 重启命令特殊处理
 } receiveFun;
 
 // 类定义
-typedef struct _NetDevATCmdData
-{                         // 成员
+typedef struct _NetDevATCmdData {                         // 成员
     int8_t CmdID;         // 指令ID
     int8_t Next_CmdID;    // 下一条指令ID
-    char *ATCmd;          // AT指令
-    char *SucessStr;      // 成功返回的字符串
+    char * ATCmd;          // AT指令
+    char * SucessStr;      // 成功返回的字符串
     bool RunFlag;         // 是否执行当前指令
     uint8_t CmsResCount;  // 回复查询次数限制
     uint8_t CmdSendCount; // 指令发送次数限制
