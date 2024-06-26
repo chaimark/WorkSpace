@@ -183,10 +183,10 @@ void Modfiy_Parameter_By_CH340(void) {
         LPUART1Ddata.TxBuf[Len++] = 0x90;
         LPUART1Ddata.TxBuf[Len++] = 0x1F;
 
-        char IPTemp[13] = {0};
-        HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IPTemp, 13);
+        char IDTemp[13] = {0};
+        HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 13);
         for (int i = 0; i < 11; i++) {
-            LPUART1Ddata.TxBuf[Len++] = IPTemp[i + 1];
+            LPUART1Ddata.TxBuf[Len++] = IDTemp[i + 1];
         }
         LPUART1Ddata.TxBuf[3] = 0X10; //
         cs = 0;
@@ -804,7 +804,7 @@ void Modfiy_Parameter_By_CH340(void) {
             LPUart1Send(LPUART1Ddata.TxBuf, 2); // OK
 
         // ASCIIToHEX2(Temp_Buffer, AT24CXX_Manager.gw_id, 5);
-        EEprom_JSON_Write((unsigned char *)(&AT24CXX_Manager.gw_id), 6);
+        // EEprom_JSON_Write((unsigned char *)(&AT24CXX_Manager.gw_id), 6);
 
         // Set_NET_Local_IMEI_From_Buffer_To_AT256(Temp_Buffer);
         // Read_NET_Local_IMEI_From_AT256_To_ARM();
