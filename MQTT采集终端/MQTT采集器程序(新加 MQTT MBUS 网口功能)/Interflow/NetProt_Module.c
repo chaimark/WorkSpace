@@ -242,7 +242,7 @@ bool SetDevATCMDModel_ThroughSendData(void) {
                 }
             }
         } else {
-            copyDataForUART();
+            ATConfig_Flag = copyDataForUART();
         }
     }
     if (ATConfig_Flag == true) {
