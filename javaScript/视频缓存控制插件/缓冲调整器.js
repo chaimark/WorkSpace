@@ -70,7 +70,7 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+function excludeVidoData() {
     'use strict';
 
     // 获取浏览器语言并选择相应的翻译
@@ -183,4 +183,4 @@ D：上一帧     F：下一帧(youtube.com用E键)`
     // 注册一个菜单命令，菜单命令的回调函数为alert函数，参数为MSG.helpBody
     GM_registerMenuCommand(MSG.helpMenuOption, alert.bind(w, MSG.helpBody));
 
-})();
+}
