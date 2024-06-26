@@ -122,8 +122,8 @@ void setMQTTMassagePUBCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd) {
     // AT+MQTTPUB=1,ON,hy/gw/get/02345678903,0,1,0,OFF,2
     memset(OutStr.Name._char, 0, OutStr.MaxLen);
     char IDTemp[13] = {0};
-    HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 13);
-    sprintf(OutStr.Name._char, "AT+MQTTPUB=1,ON,hy/gw/get/%s,0,%d,0,OFF,2\r\n", IDTemp, My_PUSName_I);
+    HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 12);
+    sprintf(OutStr.Name._char, "AT+MQTTPUB=1,ON,hy/gw/get/%s,0,%d,0,OFF,2\r\n", &IDTemp[1], My_PUSName_I);
     int ArrayLen = strlen(OutStr.Name._char);
     OutStr.Name._char[(ArrayLen < OutStr.MaxLen) ? ArrayLen : (OutStr.MaxLen - 1)] = '\0';
 }

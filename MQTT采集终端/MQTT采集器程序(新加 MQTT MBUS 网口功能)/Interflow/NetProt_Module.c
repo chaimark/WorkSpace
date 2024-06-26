@@ -22,15 +22,10 @@ bool isMQTTLinkOnleng(void) {
 // 注册上线
 void publishUpDataForMQTT(void) {
     memset(Now_NetDevParameter.NetDataBuff, 0, sizeof(Now_NetDevParameter.NetDataBuff));
-    //登录: 0x10, 0x16, 0x00, 0x04, 0x4D, 0x51, 0x4 ,0x54, 0x04, 0xC2, 0x00, 0x64, 0x00, 0x02, 0x71, 0x6C, 0x00, 0x02, 0x71, 0x6C, 0x00, 0x02, 0x71, 0x6C
-    char LoginStr[24] = {0x10, 0x16, 0x00, 0x04, 0x4D, 0x51, 0x04 ,0x54, 0x04, 0xC2, 0x00, 0x64, 0x00, 0x02, 0x71, 0x6C, 0x00, 0x02, 0x71, 0x6C, 0x00, 0x02, 0x71, 0x6C};
-    //主题: 0x82, 0x0C, 0x00, 0x0A, 0x00, 0x07, 0x68, 0x79, 0x2F, 0x67, 0x77, 0x2F, 0x23, 0x00 
-    char Tille[14] = {0x82, 0x0C, 0x00, 0x0A, 0x00, 0x07, 0x68, 0x79, 0x2F, 0x67, 0x77, 0x2F, 0x23, 0x00,};
-    sendDataByNetProt((unsigned char *)LoginStr, 24);
-    FL_DelayMs(2000); // 延时等待重启结束
-    sendDataByNetProt((unsigned char *)Tille, 14);
-    char JsonData[] = {"hy/gw/get/02345678903{\"gw\":{\"msg_id\":16,\"msg_gw_pr\":0,\"gw_id\":\"02345678903\"},\"data\":{\"update_gw_id\":\"02345678904\"}}"};
-    FL_DelayMs(2000); // 延时等待重启结束
+    char IDTemp[13] = {0};
+    HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 12);
+    char JsonData[250] = {0};
+    sprintf(JsonData,"hy/gw/get/%s{}",&IDTemp[1]);
     sendDataByNetProt((unsigned char *)JsonData, strlen(JsonData));
 }
 // 处理用户请求/命令
@@ -131,7 +126,7 @@ void MOTT_Net_Task(void) {
             if (isMQTTLinkOnleng()) {
                 Now_NetDevParameter.NowNetOnlineFlag = true; // 设备已在线
                 Now_NetDevParameter.ReBootCount = 0;		 // 连接成功，重器计数清零
-                publishUpDataForMQTT();// 注册上线
+                // publishUpDataForMQTT();// 注册上线
             }
         }
         memset(Now_NetDevParameter.NetDataBuff, 0, sizeof(Now_NetDevParameter.NetDataBuff));
