@@ -3,16 +3,16 @@
         {
             "name": "4G_MBUS_NET_MQTT",
             "includePath": [
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\FM33LC0xx_FL_Driver\\Inc",
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\CMSIS\\Device\\FM\\FM33xx\\Include",
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\MF-config",
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\User",
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Interflow",
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\FM33LC0xx_FL_Driver\\Inc",
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\CMSIS\\Device\\FM\\FM33xx\\Include",
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\MF-config",
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\User",
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Interflow",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\CMSIS\\Device\\FM\\FM33xx\\Source",
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\FM33LC0xx_FL_Driver\\Src",
-                "e:\\work\\临时文件夹\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\CMSIS\\Device\\FM\\FM33xx\\Source\\Templates\\arm"
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\CMSIS\\Device\\FM\\FM33xx\\Source",
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\FM33LC0xx_FL_Driver\\Src",
+                "e:\\work\\git仓库\\WorkSpace\\MQTT采集终端\\MQTT采集器程序(新加 MQTT MBUS 网口功能)\\Drivers\\CMSIS\\Device\\FM\\FM33xx\\Source\\Templates\\arm"
             ],
             "defines": [
                 "FM33LC0XX",

@@ -71,15 +71,15 @@ void flagChangeUartIDCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd)
     char *pAddr = NULL;
     if ((pAddr = myStrstr(AtCmd, "SOCKLKA", strlen(AtCmd))) != NULL)
     {
-        pAddr += strlen("SOCKLKA");
+        pAddr += strlen("SOCKLKA") + 1;
     }
     else if ((pAddr = myStrstr(AtCmd, "MAXSK", strlen(AtCmd))) != NULL)
     {
-        pAddr += strlen("MAXSK");
+        pAddr += strlen("MAXSK") + 1;
     }
     else if ((pAddr = myStrstr(AtCmd, "TCPSE", strlen(AtCmd))) != NULL)
     {
-        pAddr += strlen("TCPSE");
+        pAddr += strlen("TCPSE") + 1;
     }
     (*pAddr) = '2'; // 修改为使用串口2
     copyString(OutStr.Name._char, AtCmd, OutStr.MaxLen, strlen(AtCmd));
@@ -109,7 +109,7 @@ void setRemoteIPCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd)
     memset(OutStr.Name._char, 0, OutStr.MaxLen);
     if (myStrstr(NowATCmd.ATCmd, "SOCKA2", strlen(NowATCmd.ATCmd)) != NULL)
     {
-        sprintf(OutStr.Name._char, "AT+SOCK2=TCPC,%s,%d\r\n", AT24CXX_Manager.NET4G_Remote_Url, AT24CXX_Manager.NET_Remote_Port);
+        sprintf(OutStr.Name._char, "AT+SOCKA2=TCPC,%s,%d\r\n", AT24CXX_Manager.NET4G_Remote_Url, AT24CXX_Manager.NET_Remote_Port);
     }
     else if (myStrstr(NowATCmd.ATCmd, "MQTTSER", strlen(NowATCmd.ATCmd)) != NULL)
     {
@@ -117,7 +117,7 @@ void setRemoteIPCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd)
     }
     else
     {
-        easyATCmdDataLoad(OutStr, NowATCmd);
+        copyString(OutStr.Name._char, NowATCmd.ATCmd, OutStr.MaxLen, strlen(NowATCmd.ATCmd));
     }
     int ArrayLen = strlen(OutStr.Name._char);
     OutStr.Name._char[(ArrayLen < OutStr.MaxLen) ? ArrayLen : (OutStr.MaxLen - 1)] = '\0';
@@ -125,13 +125,17 @@ void setRemoteIPCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd)
 void setUserAndPassWordDataLoad(strnew OutStr, NetDevATCmd NowATCmd)
 {
     memset(OutStr.Name._char, 0, OutStr.MaxLen);
-    if (strcmp(NowATCmd.ATCmd, "AT+MQTTUSER=ql") == 0)
+    if (strcmp(NowATCmd.ATCmd, "AT+MQTTUSER=ql\r\n") == 0)
     {
         sprintf(OutStr.Name._char, "AT+MQTTUSER=%s\r\n", "ql");
     }
-    else if (strcmp(NowATCmd.ATCmd, "AT+MQTTPSW=ql") == 0)
+    else if (strcmp(NowATCmd.ATCmd, "AT+MQTTPSW=ql\r\n") == 0)
     {
         sprintf(OutStr.Name._char, "AT+MQTTPSW=%s\r\n", "ql");
+    }
+    else
+    {
+        copyString(OutStr.Name._char, NowATCmd.ATCmd, OutStr.MaxLen, strlen(NowATCmd.ATCmd));
     }
     int ArrayLen = strlen(OutStr.Name._char);
     OutStr.Name._char[(ArrayLen < OutStr.MaxLen) ? ArrayLen : (OutStr.MaxLen - 1)] = '\0';
@@ -143,7 +147,7 @@ void setMQTTMassagePUBCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd)
     memset(OutStr.Name._char, 0, OutStr.MaxLen);
     char IDTemp[13] = {0};
     HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 12);
-    sprintf(OutStr.Name._char, "AT+MQTTPUB=1,ON,hy/gw/get/%s,0,%d,0,OFF,2\r\n", &IDTemp[1], My_PUSName_I);
+    sprintf(OutStr.Name._char, "AT+MQTTPUB=1,ON,hy/gw/set/%s,0,%d,0,OFF,2\r\n", &IDTemp[1], My_PUSName_I);
     int ArrayLen = strlen(OutStr.Name._char);
     OutStr.Name._char[(ArrayLen < OutStr.MaxLen) ? ArrayLen : (OutStr.MaxLen - 1)] = '\0';
 }
@@ -151,7 +155,7 @@ void setMQTTMassageSUBCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd)
 {
     // AT+MQTTSUB=1,ON,/hy/gw/#,0,0,&#44,2
     memset(OutStr.Name._char, 0, OutStr.MaxLen);
-    sprintf(OutStr.Name._char, "AT+MQTTSUB=1,ON,/hy/gw/#,0,0,&#44,2\r\n");
+    sprintf(OutStr.Name._char, "AT+MQTTSUB=1,ON,/hy/gw/get/02345678903,0,0,&#44,2\r\n");
     int ArrayLen = strlen(OutStr.Name._char);
     OutStr.Name._char[(ArrayLen < OutStr.MaxLen) ? ArrayLen : (OutStr.MaxLen - 1)] = '\0';
 }
