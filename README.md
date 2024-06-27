@@ -10,6 +10,8 @@ git config --global user.name chai21sks <br>
 git config --global user.email xxxx@xx.com <br>
 ### 删除网络配置
 git config --global --unset http.proxy <br>
+#### 清理DNS
+ipconfig /flushdns <br>
 ### 创建初始化本地仓库
 git init <br>
 ### 克隆 github 仓库
