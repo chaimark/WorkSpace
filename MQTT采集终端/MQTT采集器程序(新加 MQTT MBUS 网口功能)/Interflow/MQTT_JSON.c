@@ -490,7 +490,7 @@ int MQTT_JSON_Analysis(char * data) {
                         if ((strstr((char *)p, "\r\n>")) != NULL)
                             break;
                         #warning "quiz ASCIIToHEX2";
-                        ASCIIToHEX2((char *)p,strlen((char *)p), (char *)Copy_MeterId[i].meterIds, 7);
+                        ASCIIToHEX2((char *)p, strlen((char *)p), (char *)Copy_MeterId[i].meterIds, 7);
                         p += 17;
                     }
                     JSON_Send_Add_Stat(id, 142);
@@ -545,7 +545,7 @@ int MQTT_JSON_Analysis(char * data) {
                     Len++;
                 }
                 #warning "quiz ASCIIToHEX2";
-                ASCIIToHEX2((char *)change_char,strlen((char *)change_char), (char *)change_char, (Len / 2));
+                ASCIIToHEX2((char *)change_char, strlen((char *)change_char), (char *)change_char, (Len / 2));
                 for (int i = 0; i < (Len / 2); i++) {
                     change_char[i] = swapLowHight_Of_Char(change_char[i]);
                 }
@@ -605,7 +605,7 @@ int MQTT_JSON_Analysis(char * data) {
                     char * P_end = myStrstr(p, "\"", imm_Read.immediately_TX_Len);
                     imm_Read.immediately_TX_Len = (P_end - p) / 2;
                     #warning "quiz ASCIIToHEX2";
-                    ASCIIToHEX2((char *)p,strlen((char *)p), (char *)imm_Read.immediately_TXBuffer, imm_Read.immediately_TX_Len);
+                    ASCIIToHEX2((char *)p, strlen((char *)p), (char *)imm_Read.immediately_TXBuffer, imm_Read.immediately_TX_Len);
                     if ((JSON_Find_Int(p, &json_matching.transparent_count, &temp1)) == NULL)
                         temp1 = -1;
                     if ((temp1 > 0) && (temp1 <= 20)) {
