@@ -50,8 +50,8 @@ void strArrayToNumberArray(char NumberArray[], char StrArray[], int ArrayMinLen)
 }
 
 // 任意进制数 转 对应进制数组 返回长度
-uint64_t anyBaseNumberToSameArray(uint8_t * Output, int StrSize, uint64_t InputNumber) {// StrSize 最小16字节
-    uint8_t Add_i = 0;
+uint64_t anyBaseNumberToSameArray(uint8_t * Output, int StrSize, uint64_t InputNumber) {
+    int8_t Add_i = 0;
     uint8_t TempArray[16] = {0}; // uint64_t也只有16位数 0x0000000000000001
     uint64_t OutLen = 0;
 
@@ -63,7 +63,7 @@ uint64_t anyBaseNumberToSameArray(uint8_t * Output, int StrSize, uint64_t InputN
     // 计算长度
     OutLen = StrSize;
     Add_i = StrSize;
-    while (TempArray[--Add_i] == 0) {
+    while ((TempArray[--Add_i] == 0) && (Add_i >= 0)) {
         OutLen--;
     }
     swapStr((char *)TempArray, OutLen);
@@ -167,7 +167,7 @@ int64_t anyBaseArrayToAnyBaseNumber(char IntArray[], int ArrayMinLen, int Intput
 
 // 单字节数组 转 双字节数组 0x23 --> 0x02 0x03
 int shortChStrToDoubleChStr(strnew inputArray, strnew OutputArray) {
-    if (inputArray.Name._char != OutputArray.Name._char) {
+    if (&(inputArray.Name._char) != &(OutputArray.Name._char)) {
         int ResLen = 0;
         char TempChar[2] = {0};
         if (OutputArray.MaxLen < (inputArray.MaxLen * 2)) {

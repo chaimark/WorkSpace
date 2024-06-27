@@ -25,7 +25,7 @@ void publishUpDataForMQTT(void) {
     char IDTemp[13] = {0};
     HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 12);
     char JsonData[250] = {0};
-    sprintf(JsonData,"hy/gw/get/%s{}",&IDTemp[1]);
+    sprintf(JsonData, "hy/gw/get/%s{}", &IDTemp[1]);
     sendDataByNetProt((unsigned char *)JsonData, strlen(JsonData));
 }
 // 处理用户请求/命令
@@ -132,13 +132,11 @@ void MOTT_Net_Task(void) {
         memset(Now_NetDevParameter.NetDataBuff, 0, sizeof(Now_NetDevParameter.NetDataBuff));
     } else { // 设备在线进入数据透传模式
         if (Now_NetDevParameter.MQTT_NET_Receive_checkTime == 0) { // 20ms check 一次，后获取数据
-            Now_NetDevParameter.MQTT_NET_Receive_checkTime = 2;
+            Now_NetDevParameter.MQTT_NET_Receive_checkTime = 50;
             if (copyDataForUART()) { // 从 UART0Ddata 获取数据
                 // 解析收到的数据，找到 josn 数据
-                if (myStrstr(Now_NetDevParameter.NetDataBuff, "+QMTRECV:", sizeof(Now_NetDevParameter.NetDataBuff)) != NULL) {
-                    if (((p_star = myStrstr(Now_NetDevParameter.NetDataBuff, "hy/gw/get/", sizeof(Now_NetDevParameter.NetDataBuff))) != NULL) && ((p_star = strstr(p_star, "\",")) != NULL)) {
-                        MQTT_JSON_Analysis(p_star);
-                    }
+                if (((p_star = myStrstr(Now_NetDevParameter.NetDataBuff, "hy/gw/get/", sizeof(Now_NetDevParameter.NetDataBuff))) != NULL) && ((p_star = strstr(p_star, "\",")) != NULL)) {
+                    MQTT_JSON_Analysis(p_star);
                 }
             }
         }
@@ -254,6 +252,6 @@ bool SetDevATCMDModel_ThroughSendData(void) {
 }
 // AT 参数初始化
 void setNetArgumentInit(void) {
-    Now_NetDevParameter.MQTT_NET_Receive_checkTime = 2;
+    Now_NetDevParameter.MQTT_NET_Receive_checkTime = 50;
     return;
 }

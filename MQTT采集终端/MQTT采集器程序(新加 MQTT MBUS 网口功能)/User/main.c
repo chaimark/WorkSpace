@@ -319,9 +319,6 @@ int main(void) {
         MQTT_4G_Init(); // 初始化 通信
     }
     while (1) {
-        char TempID[13] = {0};
-        HEX2ToASCII(AT24CXX_Manager.gw_id, 6, TempID, 13);
-        TempID[12] = 0;
         FL_IWDT_ReloadCounter(IWDT); // 喂狗
         if (UP_Mode_EC20_ON == 1) {
             // MOTT_Net_Task();
