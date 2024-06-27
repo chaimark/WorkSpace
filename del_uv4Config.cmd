@@ -1,5 +1,6 @@
 @echo off
 
+git rm -rf --cached *.exe
 git rm -rf --cached *.EDZ
 git rm -rf --cached *.dep
 git rm -rf --cached *.Bak

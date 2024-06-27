@@ -232,57 +232,18 @@ void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len) {
     // HEX TO STR-------------------
 }
 
-// **********数据处理函数 (内部使用)****************************
-int AsciiToHEX2(strnew inputAscii, strnew OutputHex) {
-    char * Asc = inputAscii.Name._char;
-    char * Hex = OutputHex.Name._char;
-    unsigned char valueH = 0;
-    unsigned char valueL = 0;
-
-    if (inputAscii.MaxLen <= (OutputHex.MaxLen * 2)) {
-        for (int i = 0; i < OutputHex.MaxLen; i++) {
-            valueL = 0;
-            valueH = 0;
-            if (Asc[(2 * i)] >= '0' && Asc[(2 * i)] <= '9')
-                valueH = Asc[(2 * i)] - '0';
-            else if (Asc[(2 * i)] >= 'a' && Asc[(2 * i)] <= 'f')
-                valueH = Asc[(2 * i)] - 'a' + 10;
-            else if (Asc[(2 * i)] >= 'A' && Asc[(2 * i)] <= 'F')
-                valueH = Asc[(2 * i)] - 'A' + 10;
-            else
-                return -1;
-
-            if (Asc[(2 * i) + 1] >= '0' && Asc[(2 * i) + 1] <= '9')
-                valueL = Asc[(2 * i) + 1] - '0';
-            else if (Asc[(2 * i) + 1] >= 'a' && Asc[(2 * i) + 1] <= 'f')
-                valueL = Asc[(2 * i) + 1] - 'a' + 10;
-            else if (Asc[(2 * i) + 1] >= 'A' && Asc[(2 * i) + 1] <= 'F')
-                valueL = Asc[(2 * i) + 1] - 'A' + 10;
-            else
-                return -1;
-
-            Hex[i] = (((valueH << 4) & 0xF0) | (valueL & 0x0F));
-        }
-        return 0;
-    }
-    return -1;
-}
-
 // 外用接口
 int ASCIIToHEX2(char * asc, int asc_len, char * hex, int hex_len) {
-    strnew inputAscii;
-    strnew OutputHex;
-    #warning "quiz ASCIIToHEX2";
-    inputAscii.Name._char = asc;
-    OutputHex.Name._char = hex;
-    OutputHex.MaxLen = hex_len;
-    inputAscii.MaxLen = strlen(asc);
+    // STR TO HEX-------------------
+    strnew IDStr;
+    strnew IDHex;
+    IDStr.Name._char = asc;
+    IDStr.MaxLen = asc_len;
+    IDHex.Name._char = hex;
+    IDHex.MaxLen = hex_len;
 
-    return AsciiToHEX2(inputAscii, OutputHex);
-    // strnew IDStr;
-    // strnew IDHex;
-    // IDHex.Name._char = hex;
-    // IDHex.MaxLen = hex_len;
-    // IDStr.Name._char = asc;
-    // IDStr.MaxLen = asc_len;
+
+    shortChStrToDoubleChStr(IDHex, IDStr);
+    numberArrayToStrArray(IDStr.Name._char, IDStr.Name._char, IDStr.MaxLen);
+    // STR TO HEX-------------------
 }
