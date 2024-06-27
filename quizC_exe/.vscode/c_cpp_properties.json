@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "MinGW64",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "E:\\Program Files\\mingw64\\bin\\gcc.exe",  //编译器的命令执行路径
+            "includePath": [
+                "${workspaceFolder}"
+            ],
+            "cStandard": "c11",  //C编译器
+            "cppStandard": "c++17"  //C++编译器
+        }
+    ],
+    "version": 4
+ }
