@@ -6,12 +6,12 @@
 #define  UARTMAX   1024
 
 typedef struct{
-	uint8_t TxBuf[UARTMAX];	//·¢ËÍÊı¾İÖ¸Õë
-	uint16_t TxLen;	//´ı·¢ËÍÊı¾İ³¤¶È
-	uint16_t TxOpc;	//ÒÑ·¢ËÍÊı¾İ³¤¶È	
-	uint8_t RxBuf[UARTMAX];	//½ÓÊÕÊı¾İÖ¸Õë
-	uint16_t RxLen;	//´ı½ÓÊÕÊı¾İ³¤¶È
-	uint16_t RxOpc;	//ÒÑ½ÓÊÕÊı¾İ³¤¶È
+	uint8_t TxBuf[UARTMAX];	//å‘é€æ•°æ®æŒ‡é’ˆ
+	uint16_t TxLen;	//å¾…å‘é€æ•°æ®é•¿åº¦
+	uint16_t TxOpc;	//å·²å‘é€æ•°æ®é•¿åº¦	
+	uint8_t RxBuf[UARTMAX];	//æ¥æ”¶æ•°æ®æŒ‡é’ˆ
+	uint16_t RxLen;	//å¾…æ¥æ”¶æ•°æ®é•¿åº¦
+	uint16_t RxOpc;	//å·²æ¥æ”¶æ•°æ®é•¿åº¦
 }UARTOpStruct;
 extern void copyDataForUART(void);
 

@@ -5,15 +5,9 @@ int catString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
 bool copyString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
 char * myStrstr(char * MotherStr, char * SonStr, int MotherMaxSize);
 char * myStrstrCont(char * MotherStr, char * SonStr, int MotherMaxSize, int ContNum);
-// int isFoundStr(char *MotherStr, char *SonStr, int MaxSize, int RunTimeMS);
 void swapChr(char * a, char * b);
 void swapStr(char * IntputStr, int StrLen);
 char swapLowHight_Of_Char(char InputCh);
-int AsciiToHEX2(strnew inputAscii, strnew OutputHex);
-void HEX2ToAscii(strnew inputHex, strnew OutputAscii);
-
-// 外部接口
-int ASCIIToHEX2(char * asc, char * hex, unsigned char len);
 
 /*******************************************************************************************************************/
 /*******************************************************************************************************************/
@@ -128,18 +122,7 @@ char * myStrstrCont(char * MotherStr, char * SonStr, int MotherMaxSize, int Cont
     }
     return p_star;
 }
-//// 查找返回是否存在字串
-// int isFoundStr(char *MotherStr, char *SonStr, int MaxSize, int RunTimeMS)
-//{
-//	char *p_star = NULL;
-//	for (int i = 0; i < RunTimeMS; i++)
-//	{
-//		if ((p_star = myStrstr(MotherStr, SonStr, MaxSize)) != NULL) // 假设查询一次100ms
-//			break;
-//		copyDataForUART();
-//	}
-//	return ((p_star == NULL) ? 0 : 1);
-// }
+
 //  交换两个字符
 void swapChr(char * a, char * b) {
     char temp = *a;
@@ -166,73 +149,5 @@ char swapLowHight_Of_Char(char InputCh) {
     char DataL = (InputCh & 0x0F) << 4;
 
     return (DataL | DataH);
-}
-// **********数据处理函数 (内部使用)****************************
-int AsciiToHEX2(strnew inputAscii, strnew OutputHex) {
-    char * Asc = inputAscii.Name._char;
-    char * Hex = OutputHex.Name._char;
-    unsigned char valueH = 0;
-    unsigned char valueL = 0;
-
-    if (inputAscii.MaxLen <= (OutputHex.MaxLen * 2)) {
-        for (int i = 0; i < OutputHex.MaxLen; i++) {
-            valueL = 0;
-            valueH = 0;
-            if (Asc[(2 * i)] >= '0' && Asc[(2 * i)] <= '9')
-                valueH = Asc[(2 * i)] - '0';
-            else if (Asc[(2 * i)] >= 'a' && Asc[(2 * i)] <= 'f')
-                valueH = Asc[(2 * i)] - 'a' + 10;
-            else if (Asc[(2 * i)] >= 'A' && Asc[(2 * i)] <= 'F')
-                valueH = Asc[(2 * i)] - 'A' + 10;
-            else
-                return -1;
-
-            if (Asc[(2 * i) + 1] >= '0' && Asc[(2 * i) + 1] <= '9')
-                valueL = Asc[(2 * i) + 1] - '0';
-            else if (Asc[(2 * i) + 1] >= 'a' && Asc[(2 * i) + 1] <= 'f')
-                valueL = Asc[(2 * i) + 1] - 'a' + 10;
-            else if (Asc[(2 * i) + 1] >= 'A' && Asc[(2 * i) + 1] <= 'F')
-                valueL = Asc[(2 * i) + 1] - 'A' + 10;
-            else
-                return -1;
-
-            Hex[i] = (((valueH << 4) & 0xF0) | (valueL & 0x0F));
-        }
-        return 0;
-    }
-    return -1;
-}
-void HEX2ToAscii(strnew inputHex, strnew OutputAscii) {
-    char * Hex = inputHex.Name._char;
-    char * Asc = OutputAscii.Name._char;
-    char i;
-    char a, b;
-    if ((inputHex.MaxLen * 2) <= OutputAscii.MaxLen) {
-        for (i = 0; i < inputHex.MaxLen; ++i) {
-            a = Hex[i] >> 4;
-            if (((a == 0) || (a > 0)) && a <= 9)
-                Asc[2 * i] = a + 0x30;
-            else if (a >= 10 && a <= 15)
-                Asc[2 * i] = a - 10 + 0x41;
-
-            b = Hex[i] & 0x0f;
-            if (((b == 0) || (b > 0)) && b <= 9)
-                Asc[2 * i + 1] = b + 0x30;
-            else if (b >= 10 && b <= 15)
-                Asc[2 * i + 1] = b - 10 + 0x41;
-        }
-    }
-}
-
-// 外用接口
-int ASCIIToHEX2(char * asc, char * hex, unsigned char len) {
-    strnew inputAscii;
-    strnew OutputHex;
-
-    inputAscii.Name._char = asc;
-    OutputHex.Name._char = hex;
-    OutputHex.MaxLen = len;
-    inputAscii.MaxLen = strlen(asc);
-    return AsciiToHEX2(inputAscii, OutputHex);
 }
 
