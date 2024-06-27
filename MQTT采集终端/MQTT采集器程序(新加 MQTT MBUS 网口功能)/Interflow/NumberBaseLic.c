@@ -6,16 +6,15 @@
 // hex(0x1010)  //表示 bin(1010)
 // hex(0x1f)    //表示 hex(0x1f)
 */
-// int ASCIIToHEX2(char *asc, char *hex, unsigned char len);	// 外用接口 双字符串 转 单数组串 0x31 0x32 ==> 0x12
-void numberArrayToStrArray(char StrArray[], char NumberArray[], int ArrayMinLen);									// 将数组串转字符串 0x01 0x02 ==> 0x31 0x32
-void strArrayToNumberArray(char NumberArray[], char StrArray[], int ArrayMinLen);									// 将字符串转数组串 0x31 0x32 ==> 0x01 0x02
-uint64_t anyBaseToAnyBase(uint64_t Number, int IntputBase, int OutputBase);											// 任意进制互转
+void numberArrayToStrArray(char StrArray[], char NumberArray[], int ArrayMinLen);                                   // 将数组串转字符串 0x01 0x02 ==> 0x31 0x32
+void strArrayToNumberArray(char NumberArray[], char StrArray[], int ArrayMinLen);                                   // 将字符串转数组串 0x31 0x32 ==> 0x01 0x02
+uint64_t anyBaseToAnyBase(uint64_t Number, int IntputBase, int OutputBase);                                         // 任意进制互转
 int anyBaseNumberToAnyBaseArray(uint64_t Number, int IntputBase, int OutputBase, char OutArray[], int ArrayMinLen); // 任意进制数 转 任意进制数组
-int64_t anyBaseArrayToAnyBaseNumber(char IntArray[], int ArrayMinLen, int IntputBase, int OutputBase);				// 任意进制数组 转 任意进制数
-int shortChStrToDoubleChStr(strnew inputArray, strnew OutputArray);													// 单字节数组 转 双字节数组 0x23 --> 0x02 0x03
-int doubleChStrToShortChStr(strnew inputArray, strnew OutputArray);													// 双字节数组 转 单字节数组 0x02 0x03 --> 0x23
-int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, int OutputBase);								// 字符串 转 任意进制数
-int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase);					// 任意进制数 转 字符串
+int64_t anyBaseArrayToAnyBaseNumber(char IntArray[], int ArrayMinLen, int IntputBase, int OutputBase);              // 任意进制数组 转 任意进制数
+int shortChStrToDoubleChStr(strnew inputArray, strnew OutputArray);                                                 // 单字节数组 转 双字节数组 0x23 --> 0x02 0x03
+int doubleChStrToShortChStr(strnew inputArray, strnew OutputArray);                                                 // 双字节数组 转 单字节数组 0x02 0x03 --> 0x23
+int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, int OutputBase);                             // 字符串 转 任意进制数
+int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase);                    // 任意进制数 转 字符串
 
 /*
 0x61 == 'a' => 0x0a;
@@ -178,7 +177,7 @@ int shortChStrToDoubleChStr(strnew inputArray, strnew OutputArray) {
             if (anyBaseNumberToSameArray((uint8_t *)TempChar, 2, inputArray.Name._char[i]) == 1) {
                 swapStr(TempChar, 2);
             }
-            ResLen += 2;  // 单字节转两字节
+            ResLen += 2; // 单字节转两字节
             OutputArray.Name._char[i * 2 + 0] = TempChar[0];
             OutputArray.Name._char[i * 2 + 1] = TempChar[1];
         }
@@ -203,36 +202,19 @@ int doubleChStrToShortChStr(strnew inputArray, strnew OutputArray) {
 
 // 字符串转 任意进制数
 int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, int OutputBase) {
-    swapStr(AscArray, ArrayLen);		// 先将数组从从大端模式改为小端
-    strArrayToNumberArray(AscArray, AscArray, ArrayLen);						   // 去掉 0x30
+    swapStr(AscArray, ArrayLen);                                                   // 先将数组从从大端模式改为小端
+    strArrayToNumberArray(AscArray, AscArray, ArrayLen);                           // 去掉 0x30
     int NumTemp = anyBaseArrayToAnyBaseNumber(AscArray, ArrayLen, 10, OutputBase); // 组合成 任意进制数
-    numberArrayToStrArray(AscArray, AscArray, ArrayLen);						   // 复原 0x30
+    numberArrayToStrArray(AscArray, AscArray, ArrayLen);                           // 复原 0x30
     return NumTemp;
 }
 // 任意进制数 转 字符串
 int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase) {
-    uint64_t TempNum = anyBaseToAnyBase(NumberData, IntputBase, 10);					// 先转到 10进制
+    uint64_t TempNum = anyBaseToAnyBase(NumberData, IntputBase, 10);                    // 先转到 10进制
     int AscArrayLen = anyBaseNumberToSameArray((uint8_t *)AscArray, ArrayLen, TempNum); // 10进制 转对应数组
-    numberArrayToStrArray(AscArray, AscArray, AscArrayLen);								// 数组串 转 字符串
+    numberArrayToStrArray(AscArray, AscArray, AscArrayLen);                             // 数组串 转 字符串
     return AscArrayLen;
 }
-
-// // 外用接口
-// int ASCIIToHEX2(char *asc, char *hex, unsigned char len)
-// {
-// 	strnew inputArray;
-// 	strnew OutputArray;
-
-// 	inputArray.Name._char = asc;
-// 	OutputArray.Name._char = hex;
-
-// 	inputArray.MaxLen = len * 2;
-// 	OutputArray.MaxLen = len;
-// 	// 0x32 0x33 --> 0x02 0x03
-// 	strArrayToNumberArray(inputArray.Name._char, inputArray.Name._char,inputArray.MaxLen);
-// 	// 0x02 0x03 --> 0x23
-// 	doubleChStrToShortChStr(inputArray, OutputArray);
-// }
 
 // 外用接口
 void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len) {
@@ -246,4 +228,59 @@ void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len) {
     shortChStrToDoubleChStr(IDHex, IDStr);
     numberArrayToStrArray(IDStr.Name._char, IDStr.Name._char, IDStr.MaxLen);
     // HEX TO STR-------------------
+}
+
+// **********数据处理函数 (内部使用)****************************
+int AsciiToHEX2(strnew inputAscii, strnew OutputHex) {
+    char * Asc = inputAscii.Name._char;
+    char * Hex = OutputHex.Name._char;
+    unsigned char valueH = 0;
+    unsigned char valueL = 0;
+
+    if (inputAscii.MaxLen <= (OutputHex.MaxLen * 2)) {
+        for (int i = 0; i < OutputHex.MaxLen; i++) {
+            valueL = 0;
+            valueH = 0;
+            if (Asc[(2 * i)] >= '0' && Asc[(2 * i)] <= '9')
+                valueH = Asc[(2 * i)] - '0';
+            else if (Asc[(2 * i)] >= 'a' && Asc[(2 * i)] <= 'f')
+                valueH = Asc[(2 * i)] - 'a' + 10;
+            else if (Asc[(2 * i)] >= 'A' && Asc[(2 * i)] <= 'F')
+                valueH = Asc[(2 * i)] - 'A' + 10;
+            else
+                return -1;
+
+            if (Asc[(2 * i) + 1] >= '0' && Asc[(2 * i) + 1] <= '9')
+                valueL = Asc[(2 * i) + 1] - '0';
+            else if (Asc[(2 * i) + 1] >= 'a' && Asc[(2 * i) + 1] <= 'f')
+                valueL = Asc[(2 * i) + 1] - 'a' + 10;
+            else if (Asc[(2 * i) + 1] >= 'A' && Asc[(2 * i) + 1] <= 'F')
+                valueL = Asc[(2 * i) + 1] - 'A' + 10;
+            else
+                return -1;
+
+            Hex[i] = (((valueH << 4) & 0xF0) | (valueL & 0x0F));
+        }
+        return 0;
+    }
+    return -1;
+}
+
+// 外用接口
+int ASCIIToHEX2(char * asc, int asc_len, char * hex, int hex_len) {
+    strnew inputAscii;
+    strnew OutputHex;
+    #warning "quiz ASCIIToHEX2";
+    inputAscii.Name._char = asc;
+    OutputHex.Name._char = hex;
+    OutputHex.MaxLen = hex_len;
+    inputAscii.MaxLen = strlen(asc);
+
+    return AsciiToHEX2(inputAscii, OutputHex);
+    // strnew IDStr;
+    // strnew IDHex;
+    // IDHex.Name._char = hex;
+    // IDHex.MaxLen = hex_len;
+    // IDStr.Name._char = asc;
+    // IDStr.MaxLen = asc_len;
 }

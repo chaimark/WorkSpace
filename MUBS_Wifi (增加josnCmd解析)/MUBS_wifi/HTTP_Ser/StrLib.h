@@ -20,35 +20,33 @@
 或需要使用时直接定义数据，并作为参数传入
 */
 // 类定义
-typedef union _newclass {
-    void * _void;		   // 无定义形指针
-    char * _char;		   // 字符型指针
-    short * _short;		   // 短整型指针
-    int * _int;			   // 整型指针
-    long * _long;		   // 长整型指针
-    long long * _LLong;	   // 长长整型指针
-    float * _float;		   // 单精度浮点型指针
-    double * _double;	   // 双精度浮点型指针
-    long double * _Ldouble; // 扩展精度浮点型指针
-} newclass;
 typedef struct New_Arr {
-    newclass Name;
-    int MaxLen;
+	union _newclass {
+		void* _void;		   // 无定义形指针
+		char* _char;		   // 字符型指针
+		short* _short;		   // 短整型指针
+		int* _int;			   // 整型指针
+		long* _long;		   // 长整型指针
+		long long* _LLong;	   // 长长整型指针
+		float* _float;		   // 单精度浮点型指针
+		double* _double;	   // 双精度浮点型指针
+		long double* _Ldouble; // 扩展精度浮点型指针
+	} Name;
+	int MaxLen;
 } strnew;
 // 建立对象
 #define NEW_NAME(ArrName) New_Str_Obj(ArrName, ARR_SIZE(ArrName))
-extern strnew New_Str_Obj(void * Master, int SizeNum); // 建立对象的函数
+extern strnew New_Str_Obj(void* Master, int SizeNum); // 建立对象的函数
 extern char TempBuff[WIFI_BUFF_MAXLEN];
 
 /*-----------------------------------外部接口----------------------------------*/
-extern int catString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
-extern bool copyString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
-extern char * myStrstr(char * MotherStr, char * SonStr, int MotherMaxSize);
-extern char * myStrstrCont(char * MotherStr, char * SonStr, int MotherMaxSize, int ContNum);
+extern int catString(char* OutStr, char* IntStr, int MaxSize, int IntSize);
+extern bool copyString(char* OutStr, char* IntStr, int MaxSize, int IntSize);
+extern char* myStrstr(char* MotherStr, char* SonStr, int MotherMaxSize);
+extern char* myStrstrCont(char* MotherStr, char* SonStr, int MotherMaxSize, int ContNum);
 extern bool isFoundStr(char * MotherStr, char * SonStr, int MaxSize, int RunTimeMS);
-extern void swapChr(char * a, char * b);
-extern void swapStr(char * IntputStr, int StrLen);
+extern void swapChr(char* a, char* b);
+extern void swapStr(char* IntputStr, int StrLen);
 extern char swapLowHight_Of_Char(char InputCh);
-
 
 #endif

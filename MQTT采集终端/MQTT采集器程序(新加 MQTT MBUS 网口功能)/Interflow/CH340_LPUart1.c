@@ -93,7 +93,8 @@ void Modfiy_Parameter_By_CH340(void) {
             Temp_Buffer[strlen((char *)Temp_Buffer)] = '0';
             Readlen++;
         }
-        ASCIIToHEX2((char *)Temp_Buffer, (char *)Temp_Buffer, (Readlen / 2));
+        #warning "quiz ASCIIToHEX2";
+        ASCIIToHEX2((char *)Temp_Buffer, Readlen, (char *)Temp_Buffer, (Readlen / 2));
         for (int i = 0; i < (Readlen / 2); i++) {
             Temp_Buffer[i] = swapLowHight_Of_Char(Temp_Buffer[i]);
         }

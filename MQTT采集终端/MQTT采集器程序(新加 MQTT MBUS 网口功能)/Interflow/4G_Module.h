@@ -32,11 +32,11 @@ extern int EC20T_SINR;
 extern unsigned char MQTT_4G_History_Confirm;
 extern unsigned char MQTT_4G_Connect_Flage;
 extern char MQTT_4G_SendBuf[UART0_MAX];
-static char* JSON_TTL_Buff = (char*)MQTT_4G_SendBuf;
+static char * JSON_TTL_Buff = (char *)MQTT_4G_SendBuf;
 
 extern void MQTT_4G_Init(void);
 extern void MQTT_4G_Task(void);
 
 extern void MQTT_4G_10mS_Timers_Add(void);
-extern void MQTT_4G_Send_Protocol_To_TTL(char* txBuffer, unsigned short int length);
+extern void MQTT_4G_Send_Protocol_To_TTL(char * txBuffer, unsigned short int length);
 #endif

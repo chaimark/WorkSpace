@@ -73,8 +73,6 @@ bool sendATCmdData(NetDevATCmd NowATCmd) {
 }
 
 void MOTT_Net_Task(void) {
-    char * p_star = NULL;
-
     if (Now_NetDevParameter.CheckTCPLinkFlag == true) { // 检查当前设备 TCP 是否连接
         if (TCP_Link_OnlineFlga != 0) {                 // 检查当前设备 TCP 是否连接，低电平有效
             Now_NetDevParameter.NowTCPLinkFlag = false; // 设备 TCP 是否连接
@@ -135,9 +133,7 @@ void MOTT_Net_Task(void) {
             Now_NetDevParameter.MQTT_NET_Receive_checkTime = 50;
             if (copyDataForUART()) { // 从 UART0Ddata 获取数据
                 // 解析收到的数据，找到 josn 数据
-                if (((p_star = myStrstr(Now_NetDevParameter.NetDataBuff, "hy/gw/get/", sizeof(Now_NetDevParameter.NetDataBuff))) != NULL) && ((p_star = strstr(p_star, "\",")) != NULL)) {
-                    MQTT_JSON_Analysis(p_star);
-                }
+                MQTT_JSON_Analysis(Now_NetDevParameter.NetDataBuff);
             }
         }
     }

@@ -319,9 +319,11 @@ int main(void) {
         MQTT_4G_Init(); // 初始化 通信
     }
     while (1) {
+        // char IDTemp[13] = {0};
+        // HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 12);
+        // ASCIIToHEX2(IDTemp,13,AT24CXX_Manager.gw_id,6);
         FL_IWDT_ReloadCounter(IWDT); // 喂狗
         if (UP_Mode_EC20_ON == 1) {
-            // MOTT_Net_Task();
             MQTT_4G_Task();
         }
         // 以太网链接网络

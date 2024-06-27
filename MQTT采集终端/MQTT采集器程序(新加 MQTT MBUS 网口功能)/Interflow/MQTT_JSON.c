@@ -458,7 +458,8 @@ int MQTT_JSON_Analysis(char * data) {
                     for (i = 0; i < 20; i++) {
                         if ((strstr((char *)p, "\r\n>")) != NULL)
                             break;
-                        ASCIIToHEX2((char *)p, (char *)Main_MeterId[i].meterIds, 7);
+                        #warning "quiz ASCIIToHEX2";
+                        ASCIIToHEX2((char *)p, strlen(p), (char *)Main_MeterId[i].meterIds, 7);
                         p += 17;
                     }
                     JSON_Send_Add_Stat(id, 132);
@@ -488,7 +489,8 @@ int MQTT_JSON_Analysis(char * data) {
                     for (i = 0; i < 20; i++) {
                         if ((strstr((char *)p, "\r\n>")) != NULL)
                             break;
-                        ASCIIToHEX2((char *)p, (char *)Copy_MeterId[i].meterIds, 7);
+                        #warning "quiz ASCIIToHEX2";
+                        ASCIIToHEX2((char *)p,strlen((char *)p), (char *)Copy_MeterId[i].meterIds, 7);
                         p += 17;
                     }
                     JSON_Send_Add_Stat(id, 142);
@@ -542,7 +544,8 @@ int MQTT_JSON_Analysis(char * data) {
                     change_char[strlen((char *)change_char)] = '0';
                     Len++;
                 }
-                ASCIIToHEX2((char *)change_char, (char *)change_char, (Len / 2));
+                #warning "quiz ASCIIToHEX2";
+                ASCIIToHEX2((char *)change_char,strlen((char *)change_char), (char *)change_char, (Len / 2));
                 for (int i = 0; i < (Len / 2); i++) {
                     change_char[i] = swapLowHight_Of_Char(change_char[i]);
                 }
@@ -552,6 +555,8 @@ int MQTT_JSON_Analysis(char * data) {
                 }
                 swapStr((char *)AT24CXX_Manager.gw_id, 6);
                 EEprom_JSON_Write((unsigned char *)(&AT24CXX_Manager.gw_id), 6);
+                char IDTemp[13] = {0};
+                HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 12);
             }
             break;
         case 17: // 修改网关时间
@@ -599,7 +604,8 @@ int MQTT_JSON_Analysis(char * data) {
                     imm_Read.immediately_TX_Len = strlen(p);
                     char * P_end = myStrstr(p, "\"", imm_Read.immediately_TX_Len);
                     imm_Read.immediately_TX_Len = (P_end - p) / 2;
-                    ASCIIToHEX2((char *)p, (char *)imm_Read.immediately_TXBuffer, imm_Read.immediately_TX_Len);
+                    #warning "quiz ASCIIToHEX2";
+                    ASCIIToHEX2((char *)p,strlen((char *)p), (char *)imm_Read.immediately_TXBuffer, imm_Read.immediately_TX_Len);
                     if ((JSON_Find_Int(p, &json_matching.transparent_count, &temp1)) == NULL)
                         temp1 = -1;
                     if ((temp1 > 0) && (temp1 <= 20)) {
