@@ -14,8 +14,9 @@ void main(void) {
     printf("\n-----------\n");
 
     memset(TempHexId, 0, HexLen);
-    ASCIIToHEX2(TempAscIIId, AscLen, TempHexId, HexLen);
+    ASCIIToHEX2(TempAscIIId, AscLen, TempAscIIId, AscLen);
     for (int i = 0; i < HexLen; i++) {
+        TempHexId[i] = TempAscIIId[i];
         printf("%x\t", TempHexId[i]);
     }
     printf("\n-----------\n");

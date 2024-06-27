@@ -16,6 +16,8 @@ int doubleChStrToShortChStr(strnew inputArray, strnew OutputArray);             
 int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, int OutputBase);                             // 字符串 转 任意进制数
 int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase);                    // 任意进制数 转 字符串
 
+void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len);
+int ASCIIToHEX2(char * asc, int asc_len, char * hex, int hex_len);
 /*
 0x61 == 'a' => 0x0a;
 0x41 == 'A' => 0x0A;
@@ -187,7 +189,7 @@ int shortChStrToDoubleChStr(strnew inputArray, strnew OutputArray) {
 }
 // 双字节数组 转 单字节数组 0x02 0x03 --> 0x23
 int doubleChStrToShortChStr(strnew inputArray, strnew OutputArray) {
-    if (inputArray.Name._char != OutputArray.Name._char) {
+    if (&(inputArray.Name._char) != &(OutputArray.Name._char)) {
         int ResLen = 0;
         if (OutputArray.MaxLen < (inputArray.MaxLen / 2)) {
             return 0;
@@ -225,62 +227,22 @@ void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len) {
     IDHex.MaxLen = hex_len;
     IDStr.Name._char = asc;
     IDStr.MaxLen = asc_len;
-    shortChStrToDoubleChStr(IDHex, IDStr);
-    numberArrayToStrArray(IDStr.Name._char, IDStr.Name._char, IDStr.MaxLen);
+    shortChStrToDoubleChStr(IDHex, IDStr);// 单字节数组 转 双字节数组 0x23 --> 0x02 0x03
+    numberArrayToStrArray(IDStr.Name._char, IDStr.Name._char, IDStr.MaxLen);// 将数组串转字符串
     // HEX TO STR-------------------
-}
-
-// **********数据处理函数 (内部使用)****************************
-int AsciiToHEX2(strnew inputAscii, strnew OutputHex) {
-    char * Asc = inputAscii.Name._char;
-    char * Hex = OutputHex.Name._char;
-    unsigned char valueH = 0;
-    unsigned char valueL = 0;
-
-    if (inputAscii.MaxLen <= (OutputHex.MaxLen * 2)) {
-        for (int i = 0; i < OutputHex.MaxLen; i++) {
-            valueL = 0;
-            valueH = 0;
-            if (Asc[(2 * i)] >= '0' && Asc[(2 * i)] <= '9')
-                valueH = Asc[(2 * i)] - '0';
-            else if (Asc[(2 * i)] >= 'a' && Asc[(2 * i)] <= 'f')
-                valueH = Asc[(2 * i)] - 'a' + 10;
-            else if (Asc[(2 * i)] >= 'A' && Asc[(2 * i)] <= 'F')
-                valueH = Asc[(2 * i)] - 'A' + 10;
-            else
-                return -1;
-
-            if (Asc[(2 * i) + 1] >= '0' && Asc[(2 * i) + 1] <= '9')
-                valueL = Asc[(2 * i) + 1] - '0';
-            else if (Asc[(2 * i) + 1] >= 'a' && Asc[(2 * i) + 1] <= 'f')
-                valueL = Asc[(2 * i) + 1] - 'a' + 10;
-            else if (Asc[(2 * i) + 1] >= 'A' && Asc[(2 * i) + 1] <= 'F')
-                valueL = Asc[(2 * i) + 1] - 'A' + 10;
-            else
-                return -1;
-
-            Hex[i] = (((valueH << 4) & 0xF0) | (valueL & 0x0F));
-        }
-        return 0;
-    }
-    return -1;
 }
 
 // 外用接口
 int ASCIIToHEX2(char * asc, int asc_len, char * hex, int hex_len) {
-    strnew inputAscii;
-    strnew OutputHex;
-    #warning "quiz ASCIIToHEX2";
-    inputAscii.Name._char = asc;
-    OutputHex.Name._char = hex;
-    OutputHex.MaxLen = hex_len;
-    inputAscii.MaxLen = strlen(asc);
+    // STR TO HEX-------------------
+    strnew IDStr;
+    strnew IDHex;
+    IDStr.Name._char = asc;
+    IDStr.MaxLen = asc_len;
+    IDHex.Name._char = hex;
+    IDHex.MaxLen = hex_len;
 
-    return AsciiToHEX2(inputAscii, OutputHex);
-    // strnew IDStr;
-    // strnew IDHex;
-    // IDHex.Name._char = hex;
-    // IDHex.MaxLen = hex_len;
-    // IDStr.Name._char = asc;
-    // IDStr.MaxLen = asc_len;
+    strArrayToNumberArray(IDStr.Name._char, IDStr.Name._char, asc_len); // 将字符串转数组串
+    return doubleChStrToShortChStr(IDStr, IDHex);// 双字节数组 转 单字节数组 0x02 0x03 --> 0x23
+    // STR TO HEX-------------------
 }

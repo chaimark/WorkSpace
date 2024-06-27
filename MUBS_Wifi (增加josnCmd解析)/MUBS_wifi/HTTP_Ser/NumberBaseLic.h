@@ -23,6 +23,6 @@ extern int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, in
 extern int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase);                    // 任意进制数 转 字符串
 
 // 外部接口
-extern void HEX2ToASCII(char *hex, int hex_len, char *asc, int asc_len);
-extern int ASCIIToHEX2(char *asc, int asc_len,char *hex, int hex_len);
+extern void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len);
+extern int ASCIIToHEX2(char * asc, int asc_len, char * hex, int hex_len);
 #endif

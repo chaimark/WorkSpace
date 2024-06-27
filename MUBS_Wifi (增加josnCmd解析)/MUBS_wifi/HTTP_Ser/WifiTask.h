@@ -56,5 +56,5 @@ extern int Http_AccepSendBuff_Len;
 
 extern void initAllWebDataAndSendAcceptBuff(void); // 初始化
 extern int setWifiTaskMain(int cmd);			   // TCP链接后，设置任务并返回任务数
-
+extern bool isFoundStr(char * MotherStr, char * SonStr, int MaxSize, int RunTimeMS);
 #endif

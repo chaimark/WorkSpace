@@ -44,11 +44,8 @@ extern int catString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
 extern bool copyString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
 extern char * myStrstr(char * MotherStr, char * SonStr, int MotherMaxSize);
 extern char * myStrstrCont(char * MotherStr, char * SonStr, int MotherMaxSize, int ContNum);
-//extern int isFoundStr(char *MotherStr, char *SonStr, int MaxSize, int RunTimeMS);
 extern void swapChr(char * a, char * b);
 extern void swapStr(char * IntputStr, int StrLen);
 extern char swapLowHight_Of_Char(char InputCh);
-
-
 
 #endif

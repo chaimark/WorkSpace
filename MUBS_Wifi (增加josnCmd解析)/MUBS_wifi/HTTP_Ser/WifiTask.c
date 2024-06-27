@@ -47,3 +47,13 @@ int setWifiTaskMain(int cmd)
 	return TaskNumber;
 }
 
+// 查找返回是否存在字串
+bool isFoundStr(char * MotherStr, char * SonStr, int MaxSize, int RunTimeMS) {
+    char * p_star = NULL;
+    for (int i = 0; i < RunTimeMS; i++) {
+        if ((p_star = myStrstr(MotherStr, SonStr, MaxSize)) != NULL) // 假设查询一次100ms
+            break;
+        copyDataForUART();
+    }
+    return ((p_star == NULL) ? 0 : 1);
+}

@@ -1,12 +1,10 @@
 #include "StrLib.h"
-#include "../Src/Uart.h"
 
 /*-----------------------------------函数说明----------------------------------*/
 int catString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
 bool copyString(char * OutStr, char * IntStr, int MaxSize, int IntSize);
 char * myStrstr(char * MotherStr, char * SonStr, int MotherMaxSize);
 char * myStrstrCont(char * MotherStr, char * SonStr, int MotherMaxSize, int ContNum);
-// int isFoundStr(char *MotherStr, char *SonStr, int MaxSize, int RunTimeMS);
 void swapChr(char * a, char * b);
 void swapStr(char * IntputStr, int StrLen);
 char swapLowHight_Of_Char(char InputCh);
@@ -124,16 +122,7 @@ char * myStrstrCont(char * MotherStr, char * SonStr, int MotherMaxSize, int Cont
     }
     return p_star;
 }
-// 查找返回是否存在字串
-bool isFoundStr(char * MotherStr, char * SonStr, int MaxSize, int RunTimeMS) {
-    char * p_star = NULL;
-    for (int i = 0; i < RunTimeMS; i++) {
-        if ((p_star = myStrstr(MotherStr, SonStr, MaxSize)) != NULL) // 假设查询一次100ms
-            break;
-        copyDataForUART();
-    }
-    return ((p_star == NULL) ? 0 : 1);
-}
+
 //  交换两个字符
 void swapChr(char * a, char * b) {
     char temp = *a;
@@ -161,5 +150,3 @@ char swapLowHight_Of_Char(char InputCh) {
 
     return (DataL | DataH);
 }
-
-
