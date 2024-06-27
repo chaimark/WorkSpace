@@ -108,9 +108,9 @@ void setRemoteIPCmdDataLoad(strnew OutStr, NetDevATCmd NowATCmd) {
 void setUserAndPassWordDataLoad(strnew OutStr, NetDevATCmd NowATCmd) {
     memset(OutStr.Name._char, 0, OutStr.MaxLen);
     if (strcmp(NowATCmd.ATCmd, "AT+MQTTUSER=ql\r\n") == 0) {
-        sprintf(OutStr.Name._char, "AT+MQTTUSER=%s\r\n", "ql");
+        sprintf(OutStr.Name._char, "AT+MQTTUSER=%s\r\n", "admin");
     } else if (strcmp(NowATCmd.ATCmd, "AT+MQTTPSW=ql\r\n") == 0) {
-        sprintf(OutStr.Name._char, "AT+MQTTPSW=%s\r\n", "ql");
+        sprintf(OutStr.Name._char, "AT+MQTTPSW=%s\r\n", "njhy1234");
     } else {
         copyString(OutStr.Name._char, NowATCmd.ATCmd, OutStr.MaxLen, strlen(NowATCmd.ATCmd));
     }
