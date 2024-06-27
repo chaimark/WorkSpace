@@ -2,13 +2,21 @@
 #include "StrLib.h"
 #include "NumberBaseLic.h"
 
-int main() {
-    char gw_id[6] = {0x00,0x23,0x45,0x67,0x89,0x04};
-    char IDTemp[13] = {0};
-    HEX2ToASCII(gw_id, 6, IDTemp, 12);
-    printf("-----------");
-    ASCIIToHEX2(IDTemp, 13, gw_id, 6);
-    printf("-----------");
-    getchar();
-    return 0;
+
+void main(void) {
+    unsigned char TempHexId[6] = {0x00,0x23,0x45,0x67,0x89,0x04};
+    unsigned char TempAscIIId[12] = {0};
+    int AscLen = 12;
+    int HexLen = 6;
+    memset(TempAscIIId, 0, AscLen);
+    HEX2ToASCII(TempHexId, HexLen, TempAscIIId, AscLen);
+    printf("%s\t", TempAscIIId);
+    printf("\n-----------\n");
+
+    memset(TempHexId, 0, HexLen);
+    ASCIIToHEX2(TempAscIIId, AscLen, TempHexId, HexLen);
+    for (int i = 0; i < HexLen; i++) {
+        printf("%x\t", TempHexId[i]);
+    }
+    printf("\n-----------\n");
 }
