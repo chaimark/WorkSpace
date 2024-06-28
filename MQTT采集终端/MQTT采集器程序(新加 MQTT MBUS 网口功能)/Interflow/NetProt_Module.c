@@ -131,9 +131,7 @@ void MOTT_Net_Task(void) {
             Now_NetDevParameter.CheckTCPLinkFlag = false;   // TCP 连接成功后暂时不需要检查
             Now_NetDevParameter.CheckOnlineFlag = false;    // TCP 连接成功后暂时不需要检查
             Now_NetDevParameter.ReBootCount = 0;            // 复位重启计数器
-            if (Switch_4G_Flag == 0) {                      // 只有再关闭4G 的情况下 才可以使用接口判断tcp是否连接成功
-                Now_NetDevParameter.NowTCPLinkFlag = true;  // TCP 已连接
-            }
+            Now_NetDevParameter.NowTCPLinkFlag = true;  // TCP 已连接
             // 判断 MQTT 是否在线
             if (isMQTTLinkOnleng()) {
                 Now_NetDevParameter.NowNetOnlineFlag = true; // 设备已在线
