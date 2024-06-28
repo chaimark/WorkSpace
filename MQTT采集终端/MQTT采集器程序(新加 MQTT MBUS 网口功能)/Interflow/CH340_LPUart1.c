@@ -93,7 +93,7 @@ void Modfiy_Parameter_By_CH340(void) {
             Temp_Buffer[strlen((char *)Temp_Buffer)] = '0';
             Readlen++;
         }
-        #warning "quiz ASCIIToHEX2";
+
         ASCIIToHEX2((char *)Temp_Buffer, Readlen, (char *)Temp_Buffer, (Readlen / 2));
         for (int i = 0; i < (Readlen / 2); i++) {
             Temp_Buffer[i] = swapLowHight_Of_Char(Temp_Buffer[i]);
@@ -185,6 +185,7 @@ void Modfiy_Parameter_By_CH340(void) {
         LPUART1Ddata.TxBuf[Len++] = 0x1F;
 
         char IDTemp[13] = {0};
+
         HEX2ToASCII((char *)AT24CXX_Manager.gw_id, 6, IDTemp, 12);
         for (int i = 0; i < 11; i++) {
             LPUART1Ddata.TxBuf[Len++] = IDTemp[i + 1];
@@ -215,6 +216,7 @@ void Modfiy_Parameter_By_CH340(void) {
         catString(urlTemp, ":", 30, 1);
 
         char TempProt[30] = {0};
+
         int ProtLen = doneBaseNumberDataToAsciiStr(TempProt, 30, AT24CXX_Manager.NET_Remote_Port, 16);
         TempProt[(ProtLen < 30) ? ProtLen : (ProtLen--)] = '\0';
         catString(urlTemp, TempProt, 30, ProtLen);
@@ -518,6 +520,7 @@ void Modfiy_Parameter_By_CH340(void) {
         LPUART1Ddata.TxBuf[Len++] = 0x1F;
 
         char TempProt[30] = {0};
+
         int ProtLen = doneBaseNumberDataToAsciiStr(TempProt, 30, AT24CXX_Manager.NET_Remote_Port, 16);
         TempProt[(ProtLen < 30) ? ProtLen : (ProtLen--)] = '\0';
         for (int i = 0; i < ProtLen; i++) {

@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define TCP_Link_OnlineFlga EC20_STATUS_VALUE
 #define Switch_4G_Flag UP_Mode_EC20_ON
 
 // 类定义
@@ -15,10 +14,9 @@ typedef struct _NetDevParameter {
     bool CheckTCPLinkFlag; // 检查TCP连接标记
     uint8_t ReBootCount;   // 重启次数
 
-    uint8_t MQTT_NET_Receive_checkTime; // 检查接收buff的间隔时间
+    uint8_t MQTT_NET_Receive_checkTime; // 检查接收 buff 的间隔时间
     char NetDataBuff[500];				// 接收数据或发送数据的缓存空间
     uint16_t NetDataBuff_NowLen;		// Buff的实际长度
-    uint8_t CheckWebDevRes;				// 查询上位机回复的标记
 } NetDevParameter;
 extern NetDevParameter Now_NetDevParameter;
 

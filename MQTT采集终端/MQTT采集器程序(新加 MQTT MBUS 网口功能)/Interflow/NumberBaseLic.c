@@ -49,52 +49,6 @@ void strArrayToNumberArray(char NumberArray[], char StrArray[], int ArrayMinLen)
         Addr++;
     } while (Addr < ArrayMinLen);
 }
-
-// 任意进制数 转 对应进制数组 返回长度
-uint64_t anyBaseNumberToSameArray(uint8_t * Output, int StrSize, uint64_t InputNumber) {
-    int8_t Add_i = 0;
-    uint8_t TempArray[16] = {0}; // uint64_t也只有16位数 0x0000000000000001
-    uint64_t OutLen = 0;
-
-    // 将数据转为字符串
-    for (Add_i = 0; (Add_i < 16) && (Add_i < StrSize); Add_i++) {
-        TempArray[Add_i] = InputNumber & 0x000000000000000F; // 先存低位
-        InputNumber = InputNumber >> 4;
-    }
-    // 计算长度
-    OutLen = StrSize;
-    Add_i = StrSize;
-    while ((TempArray[--Add_i] == 0) && (Add_i >= 0)) {
-        OutLen--;
-    }
-    swapStr((char *)TempArray, OutLen);
-    for (Add_i = 0; (Add_i < 16) && (Add_i < OutLen); Add_i++) {
-        Output[Add_i] = TempArray[Add_i];
-    }
-    return OutLen;
-}
-// 任意进制数组 转 对应进制数 返回数
-uint64_t anyArrayToSameBaseNumber(int NumberBase, uint8_t * InputStr, int StrSize) {
-    uint8_t TempArray[16] = {0}; // uint64_t也只有16位数 0x0000000000000001
-    uint64_t ResNumber = 0;
-    // 输入的数组长度大于16直接返回
-    if (StrSize > 16) {
-        return ResNumber;
-    }
-    // copy 输入的数据
-    for (int Add_i = 0; Add_i < StrSize; Add_i++) {
-        TempArray[Add_i] = InputStr[Add_i];
-    }
-    // 将数组串组装成直接表示的数
-    // 如：hex(0x125) ==> dec(125)
-    for (int Add_i = 15; Add_i >= 0; Add_i--) {
-        ResNumber = ResNumber << 4;
-        uint64_t Number = TempArray[Add_i] & 0x0F; // 0b:00001111
-        ResNumber = ResNumber | Number;
-    }
-    return ResNumber;
-}
-
 // 任意进制互转
 uint64_t anyBaseToAnyBase(uint64_t Number, int IntputBase, int OutputBase) {
     uint64_t ResNumber = Number;
@@ -142,6 +96,50 @@ uint64_t anyBaseToAnyBase(uint64_t Number, int IntputBase, int OutputBase) {
         Number = ResNumber; // 再转到任意进制
     }
     ResNumber = Number;
+    return ResNumber;
+}
+// 任意进制数 转 对应进制数组 返回长度
+uint64_t anyBaseNumberToSameArray(uint8_t * Output, int StrSize, uint64_t InputNumber) {
+    int8_t Add_i = 0;
+    uint8_t TempArray[16] = {0}; // uint64_t也只有16位数 0x0000000000000001
+    uint64_t OutLen = 0;
+
+    // 将数据转为字符串
+    for (Add_i = 0; (Add_i < 16) && (Add_i < StrSize); Add_i++) {
+        TempArray[Add_i] = InputNumber & 0x000000000000000F; // 先存低位
+        InputNumber = InputNumber >> 4;
+    }
+    // 计算长度
+    OutLen = ((StrSize > 16) ? 16 : StrSize);
+    Add_i = ((StrSize > 16) ? 16 : StrSize);
+    while ((TempArray[--Add_i] == 0) && (Add_i >= 0)) {
+        OutLen--;
+    }
+    swapStr((char *)TempArray, OutLen);
+    for (Add_i = 0; (Add_i < 16) && (Add_i < OutLen); Add_i++) {
+        Output[Add_i] = TempArray[Add_i];
+    }
+    return OutLen;
+}
+// 任意进制数组 转 对应进制数 返回数
+uint64_t anyArrayToSameBaseNumber(int NumberBase, uint8_t * InputStr, int StrSize) {
+    uint8_t TempArray[16] = {0}; // uint64_t也只有16位数 0x0000000000000001
+    uint64_t ResNumber = 0;
+    // 输入的数组长度大于16直接返回
+    if (StrSize > 16) {
+        return ResNumber;
+    }
+    // copy 输入的数据
+    for (int Add_i = 0; Add_i < StrSize; Add_i++) {
+        TempArray[Add_i] = InputStr[Add_i];
+    }
+    // 将数组串组装成直接表示的数
+    // 如：hex(0x125) ==> dec(125)
+    for (int Add_i = 15; Add_i >= 0; Add_i--) {
+        ResNumber = ResNumber << 4;
+        uint64_t Number = TempArray[Add_i] & 0x0F; // 0b:00001111
+        ResNumber = ResNumber | Number;
+    }
     return ResNumber;
 }
 
@@ -211,7 +209,7 @@ int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, int Outpu
     return NumTemp;
 }
 // 任意进制数 转 字符串
-int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase) {
+int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase) {  
     uint64_t TempNum = anyBaseToAnyBase(NumberData, IntputBase, 10);                    // 先转到 10进制
     int AscArrayLen = anyBaseNumberToSameArray((uint8_t *)AscArray, ArrayLen, TempNum); // 10进制 转对应数组
     numberArrayToStrArray(AscArray, AscArray, AscArrayLen);                             // 数组串 转 字符串
@@ -241,7 +239,6 @@ int ASCIIToHEX2(char * asc, int asc_len, char * hex, int hex_len) {
     IDStr.MaxLen = asc_len;
     IDHex.Name._char = hex;
     IDHex.MaxLen = hex_len;
-
     strArrayToNumberArray(IDStr.Name._char, IDStr.Name._char, asc_len); // 将字符串转数组串
     return doubleChStrToShortChStr(IDStr, IDHex);// 双字节数组 转 单字节数组 0x02 0x03 --> 0x23
     // STR TO HEX-------------------
