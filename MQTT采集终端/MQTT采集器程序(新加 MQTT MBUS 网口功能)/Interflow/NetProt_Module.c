@@ -104,7 +104,7 @@ void MOTT_Net_Task(void) {
     if ((Now_NetDevParameter.NowNetOnlineFlag == false) || (Now_NetDevParameter.NowTCPLinkFlag == false)) {
         setNetArgumentInit();
         // 设置模组进入 AT 模式
-				while (!SetDevATCMDModel_ThroughSendData());
+        while (!SetDevATCMDModel_ThroughSendData());
         int NowStep = 0;
         while (NowStep != -1) {
             // 一个是否执行的开关，后续可扩展为指令控制
@@ -130,13 +130,14 @@ void MOTT_Net_Task(void) {
         if (TCP_Link_OnlineFlga() == 1) {
             Now_NetDevParameter.CheckTCPLinkFlag = false;   // TCP 连接成功后暂时不需要检查
             Now_NetDevParameter.CheckOnlineFlag = false;    // TCP 连接成功后暂时不需要检查
-            Now_NetDevParameter.ReBootCount = 0;            // 复位重启计数器
             Now_NetDevParameter.NowTCPLinkFlag = true;  // TCP 已连接
             // 判断 MQTT 是否在线
             if (isMQTTLinkOnleng()) {
                 Now_NetDevParameter.NowNetOnlineFlag = true; // 设备已在线
                 Now_NetDevParameter.ReBootCount = 0;		 // 连接成功，重器计数清零
+                JSON_Send_GW_Infor((Now_NetDevParameter.ReBootCount > 0 ? true : false));
             }
+            Now_NetDevParameter.ReBootCount = 0;            // 复位重启计数器
         }
         memset(Now_NetDevParameter.NetDataBuff, 0, sizeof(Now_NetDevParameter.NetDataBuff));
     } else { // 设备在线进入数据透传模式

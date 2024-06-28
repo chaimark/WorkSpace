@@ -5,7 +5,6 @@
 #include "StrLib.h"
 
 #define This (*this)
-#define sendDataByNetProt Uart0Send // Uart0Send(unsigned char *, unsigned short int)
 
 // 所有 AT指令 《发送时》 需要的用于 《组织指令》 的函数名
 typedef enum _SendFun {                                      // 发送AT指令时调用什么函数发送，对应的函数名

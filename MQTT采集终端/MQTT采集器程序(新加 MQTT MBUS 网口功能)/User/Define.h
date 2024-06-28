@@ -171,12 +171,14 @@ extern unsigned int RS4851_UART4_BaudRate;
 extern unsigned char RS4851_UART4_Parity;
 extern unsigned int RS4852_LPUART0_BaudRate;
 extern unsigned char RS4852_LPUART0_Parity;
-extern unsigned char UP_Mode_NET_ON;
+
 extern unsigned char UP_Mode_MBUSTOUSB_ON;
 extern unsigned char UP_Mode_WIR_ON;
 extern unsigned char DOWN_Mode_WIR_ON;
 extern unsigned char DEFINE_Mode_SETUSB_ON;
+
 extern unsigned char UP_Mode_EC20_ON;
+extern unsigned char UP_Mode_NET_ON;
 
 extern void RX8025T_SDA_SET_IN(void);
 extern void RX8025T_SDA_SET_OUT(void);

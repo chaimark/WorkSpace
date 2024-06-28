@@ -1,6 +1,7 @@
 #include "MQTT_JSON.h"
 #include "NumberBaseLic.h"
 #include "StrLib.h"
+#include "NetProt_Module.h"
 #include "AT24C0256.h"
 
 static JSON_MATCHING_S json_matching = {
@@ -203,7 +204,6 @@ static char * JSON_Find_Node_Func(char * data, JSONNODE_T * json_node, unsigned 
     }
     return ret;
 }
-
 // 心跳上报信息
 void JSON_Send_GW_Infor(bool hasRST) {
     char temp_char[6] = {0};
@@ -211,14 +211,25 @@ void JSON_Send_GW_Infor(bool hasRST) {
     JSON_Send_Add_Begin(1);
     temp = 2;
     JSON_Send_Add_Item(&json_matching.stat, &temp); // 添加stats
-    // 信号强度
-    JSON_Send_Add_Item(&json_matching.CSQ, EC20T_CSQ);
-    temp = EC20T_RSSI;
-    JSON_Send_Add_Item(&json_matching.RSSI, &temp);
-    temp = EC20T_SINR;
-    JSON_Send_Add_Item(&json_matching.SINR, &temp);
-    // ccid
-    JSON_Send_Add_Item(&json_matching.CCID, EC20T_CCID);
+    if (UP_Mode_NET_ON == 1) {
+        // 信号强度
+        JSON_Send_Add_Item(&json_matching.CSQ, "99,99");
+        temp = -100;
+        JSON_Send_Add_Item(&json_matching.RSSI, &temp);
+        temp = 0;
+        JSON_Send_Add_Item(&json_matching.SINR, &temp);
+        // ccid
+        JSON_Send_Add_Item(&json_matching.CCID, "00000000000000000000");
+    } else {
+        // 信号强度
+        JSON_Send_Add_Item(&json_matching.CSQ, EC20T_CSQ);
+        temp = EC20T_RSSI;
+        JSON_Send_Add_Item(&json_matching.RSSI, &temp);
+        temp = EC20T_SINR;
+        JSON_Send_Add_Item(&json_matching.SINR, &temp);
+        // ccid
+        JSON_Send_Add_Item(&json_matching.CCID, EC20T_CCID);
+    }
     // 版本号
     sprintf(temp_char, "V%d.%d", SOFT_VERSION / 10, SOFT_VERSION % 10);
     JSON_Send_Add_Item(&json_matching.GW_Ver, temp_char);
@@ -234,7 +245,12 @@ void JSON_Send_GW_Infor(bool hasRST) {
     temp = EEprom_Byte1Read(EEPROM_COPY_METER_TOTAL_ADDR);
     JSON_Send_Add_Item(&json_matching.copy_meter_total, &temp);
     JSON_Send_Add_End();
-    MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+
+    if (UP_Mode_NET_ON == 1) {
+        sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    } else {
+        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    }
 }
 
 // 读上报周期
@@ -356,7 +372,7 @@ void JSON_Send_Main_Copy_Meter_Data(unsigned char id, unsigned char * addr, unsi
     sprintf(temp_char, "%01x%02x%02x%02x%02x%02x%02x", addr[0], addr[1], addr[2], addr[3], addr[4], addr[5], addr[6]);
     JSON_Send_Add_Item(&json_matching.meter_id, temp_char);
     strcat(JSON_TTL_Buff, "\"meter_data\":[\"");
-#warning "quiz HEX2ToASCII";
+    #warning "quiz HEX2ToASCII";
     HEX2ToASCII((char *)data, lentgh, temp_char, 270);
     strcat(JSON_TTL_Buff, temp_char);
     strcat(JSON_TTL_Buff, "\",");
@@ -370,7 +386,7 @@ void JSON_Send_Immediately_Main_Copy_Meter_Data(unsigned char id, unsigned char 
     JSON_Send_Add_Begin(id);
     JSON_Send_Add_Item(&json_matching.transparent_port, &port_num);
     strcat(JSON_TTL_Buff, "\"meter_data\":[\"");
-#warning "quiz HEX2ToASCII";
+    #warning "quiz HEX2ToASCII";
     HEX2ToASCII((char *)data, lentgh, temp_char, 240);
     strcat(JSON_TTL_Buff, temp_char);
     strcat(JSON_TTL_Buff, "\",");

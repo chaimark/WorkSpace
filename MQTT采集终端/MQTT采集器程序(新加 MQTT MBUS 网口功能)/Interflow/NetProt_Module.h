@@ -3,9 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-
-#define Switch_4G_Flag UP_Mode_EC20_ON
-
+#define sendDataByNetProt Uart0Send // Uart0Send(unsigned char *, unsigned short int)
 // 类定义
 typedef struct _NetDevParameter {
     bool NowNetOnlineFlag; // 网络在线标记
