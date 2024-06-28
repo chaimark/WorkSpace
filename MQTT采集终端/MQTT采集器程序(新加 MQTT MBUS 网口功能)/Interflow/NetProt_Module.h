@@ -13,7 +13,7 @@ typedef struct _NetDevParameter {
     uint8_t ReBootCount;   // 重启次数
 
     uint8_t MQTT_NET_Receive_checkTime; // 检查接收 buff 的间隔时间
-    char NetDataBuff[500];				// 接收数据或发送数据的缓存空间
+    char NetDataBuff[1024];				// 接收数据或发送数据的缓存空间
     uint16_t NetDataBuff_NowLen;		// Buff的实际长度
 } NetDevParameter;
 extern NetDevParameter Now_NetDevParameter;

@@ -32,7 +32,7 @@ bool TCP_Link_OnlineFlga() {
             break;   // 没有退出 AT 最后发一次
         }
         if (myStrstr(Now_NetDevParameter.NetDataBuff, cmdStr[i][1], Now_NetDevParameter.NetDataBuff_NowLen) != NULL) {
-            ATConfig_Flag = true;
+            ATConfig_Flag = (i == 0 ? true : ATConfig_Flag);
         } else {
             ATConfig_Flag = false; // 没链上TCP
         }
@@ -90,13 +90,15 @@ bool sendATCmdData(NetDevATCmd NowATCmd) {
 
 void MOTT_Net_Task(void) {
     if (Now_NetDevParameter.CheckTCPLinkFlag == true) { // 检查当前设备 TCP 是否连接
-        if (TCP_Link_OnlineFlga() != 0) {                 // 检查当前设备 TCP 是否连接，低电平有效
-            Now_NetDevParameter.NowTCPLinkFlag = false; // 设备 TCP 是否连接
+        if (TCP_Link_OnlineFlga() == false) {                // 检查当前设备 TCP 是否连接
+            Now_NetDevParameter.NowNetOnlineFlag = false; // 标记不在线，下次运行这个任务时重启
+            Now_NetDevParameter.NowTCPLinkFlag = false;	  // 标记不在线，下次运行这个任务时重启
+            Now_NetDevParameter.ReBootCount++;
         }
-        Now_NetDevParameter.ReBootCount++;
     } else if (Now_NetDevParameter.CheckOnlineFlag == true) { // 检查当前设备 network 是否在线
         if (isMQTTLinkOnleng() == false) {
-            Now_NetDevParameter.NowNetOnlineFlag = false; // 设备 network 是否在线
+            Now_NetDevParameter.NowNetOnlineFlag = false; // 标记不在线，下次运行这个任务时重启
+            Now_NetDevParameter.NowTCPLinkFlag = false;	  // 标记不在线，下次运行这个任务时重启
             Now_NetDevParameter.ReBootCount++;
         }
     }
@@ -127,10 +129,10 @@ void MOTT_Net_Task(void) {
             NowStep = NetDevice_ATData[NowStep].Next_CmdID;
         }
         // 检查当前设备 TCP 是否连接，低电平有效
-        if (TCP_Link_OnlineFlga() == 1) {
+        if (TCP_Link_OnlineFlga() == true) {
             Now_NetDevParameter.CheckTCPLinkFlag = false;   // TCP 连接成功后暂时不需要检查
             Now_NetDevParameter.CheckOnlineFlag = false;    // TCP 连接成功后暂时不需要检查
-            Now_NetDevParameter.NowTCPLinkFlag = true;  // TCP 已连接
+            Now_NetDevParameter.NowTCPLinkFlag = true;  	// TCP 已连接
             // 判断 MQTT 是否在线
             if (isMQTTLinkOnleng()) {
                 Now_NetDevParameter.NowNetOnlineFlag = true; // 设备已在线
@@ -139,7 +141,6 @@ void MOTT_Net_Task(void) {
             }
             Now_NetDevParameter.ReBootCount = 0;            // 复位重启计数器
         }
-        memset(Now_NetDevParameter.NetDataBuff, 0, sizeof(Now_NetDevParameter.NetDataBuff));
     } else { // 设备在线进入数据透传模式
         if (Now_NetDevParameter.MQTT_NET_Receive_checkTime == 0) { // 20ms check 一次，后获取数据
             Now_NetDevParameter.MQTT_NET_Receive_checkTime = 50;
@@ -149,12 +150,13 @@ void MOTT_Net_Task(void) {
             }
         }
     }
+    memset(Now_NetDevParameter.NetDataBuff, 0, sizeof(Now_NetDevParameter.NetDataBuff));
 }
 
 void MQTT_NET_10mS_Timers_Add(void) {
-    static int CheckTime = 100000; // 每 100 s 后运行任务
-    if (!(--CheckTime)) {
-        CheckTime = 100000;							 // 100 秒后，判断你是否处于连接状态
+    static int CheckTime = 6000; // 每 100 s 后运行任务
+    if ((CheckTime = (CheckTime > 0 ? (CheckTime - 1) : 0)) == 0) {
+        CheckTime = 6000;							 // 100 秒后，判断你是否处于连接状态
         Now_NetDevParameter.CheckOnlineFlag = true;	 // 检查网络在线标记
         Now_NetDevParameter.CheckTCPLinkFlag = true; // 检查TCP连接标记
     }

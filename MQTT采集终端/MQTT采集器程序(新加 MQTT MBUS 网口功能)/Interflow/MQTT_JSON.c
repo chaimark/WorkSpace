@@ -155,7 +155,12 @@ static void JSON_Send_Add_Stat(unsigned char id, unsigned int stat) {
     temp = stat;
     JSON_Send_Add_Item(&json_matching.stat, &temp);
     JSON_Send_Add_End();
-    MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    if (UP_Mode_NET_ON == 1) {
+        sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    } else {
+        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    }
+    // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
 }
 
 // 添加一个条目
@@ -251,6 +256,7 @@ void JSON_Send_GW_Infor(bool hasRST) {
     } else {
         MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
     }
+    // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
 }
 
 // 读上报周期
@@ -270,7 +276,12 @@ static void JSON_Send_GW_Read_Interval(unsigned char id) {
     temp = AT24CXX_Manager.copy_statistics;
     JSON_Send_Add_Item(&json_matching.copy_statistics, &temp);
     JSON_Send_Add_End();
-    MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    if (UP_Mode_NET_ON == 1) {
+        sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    } else {
+        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    }
+    // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
 }
 
 // 读主表表号
@@ -302,7 +313,12 @@ static void JSON_Send_Read_Main_Meter_Id(unsigned char id) {
             }
         }
         JSON_Send_Add_End_Func();
-        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+        if (UP_Mode_NET_ON == 1) {
+            sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+        } else {
+            MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+        }
+        // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
     }
 }
 
@@ -336,7 +352,12 @@ static void JSON_Send_Read_Copy_Meter_Id(unsigned char id, unsigned char num) {
             }
         }
         JSON_Send_Add_End_Func();
-        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+        if (UP_Mode_NET_ON == 1) {
+            sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+        } else {
+            MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+        }
+        // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
     }
 }
 
@@ -347,7 +368,12 @@ void JSON_Send_Copy_Statistics(void) {
     temp = AT24CXX_Manager.copy_statistics;
     JSON_Send_Add_Item(&json_matching.copy_statistics, &temp);
     JSON_Send_Add_End();
-    MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    if (UP_Mode_NET_ON == 1) {
+        sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    } else {
+        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    }
+    // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
 }
 
 // 读MQTT信息
@@ -362,7 +388,12 @@ static void JSON_Send_Read_MQTT_Parameter(unsigned char id) {
     temp = AT24CXX_Manager.NET_Remote_Port;
     JSON_Send_Add_Item(&json_matching.port, &temp);
     JSON_Send_Add_End();
-    MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    if (UP_Mode_NET_ON == 1) {
+        sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    } else {
+        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    }
+    // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
 }
 
 // 上报仪表数据
@@ -377,7 +408,12 @@ void JSON_Send_Main_Copy_Meter_Data(unsigned char id, unsigned char * addr, unsi
     strcat(JSON_TTL_Buff, temp_char);
     strcat(JSON_TTL_Buff, "\",");
     JSON_Send_Add_End_Func();
-    MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    if (UP_Mode_NET_ON == 1) {
+        sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    } else {
+        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    }
+    // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
 }
 
 // 透传数据上报
@@ -391,7 +427,12 @@ void JSON_Send_Immediately_Main_Copy_Meter_Data(unsigned char id, unsigned char 
     strcat(JSON_TTL_Buff, temp_char);
     strcat(JSON_TTL_Buff, "\",");
     JSON_Send_Add_End_Func();
-    MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    if (UP_Mode_NET_ON == 1) {
+        sendDataByNetProt((unsigned char *)JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    } else {
+        MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
+    }
+    // MQTT_4G_Send_Protocol_To_TTL(JSON_TTL_Buff, strlen(JSON_TTL_Buff));
 }
 
 int MQTT_JSON_Analysis(char * data) {
@@ -476,8 +517,7 @@ int MQTT_JSON_Analysis(char * data) {
                     for (i = 0; i < 20; i++) {
                         if ((strstr((char *)p, "\r\n>")) != NULL)
                             break;
-                        #warning "quiz ASCIIToHEX2";
-                        ASCIIToHEX2((char *)p, strlen(p), (char *)Main_MeterId[i].meterIds, 7);
+                        ASCIIToHEX2((char *)p, strlen((char *)p)-strlen("\"]}}"), (char *)Main_MeterId[i].meterIds, 7);
                         p += 17;
                     }
                     JSON_Send_Add_Stat(id, 132);
@@ -507,8 +547,7 @@ int MQTT_JSON_Analysis(char * data) {
                     for (i = 0; i < 20; i++) {
                         if ((strstr((char *)p, "\r\n>")) != NULL)
                             break;
-                        #warning "quiz ASCIIToHEX2";
-                        ASCIIToHEX2((char *)p, strlen((char *)p), (char *)Copy_MeterId[i].meterIds, 7);
+                        ASCIIToHEX2((char *)p, strlen((char *)p)-strlen("\"]}}"), (char *)Copy_MeterId[i].meterIds, 7);
                         p += 17;
                     }
                     JSON_Send_Add_Stat(id, 142);

@@ -725,13 +725,13 @@ void Modfiy_Parameter_By_CH340(void) {
         // Read_NET_Remote_Port_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
     }
-    // 功能三：重启网络模块
+    // 功能三：MCU 重启
     if (LPUART1Ddata.RxBuf[2] == 0xDC) {
         LPUART1Ddata.TxBuf[Len++] = 'O';
         LPUART1Ddata.TxBuf[Len++] = 'K';
         if (DEFINE_Mode_SETUSB_ON == 1)
             LPUart1Send(LPUART1Ddata.TxBuf, Len); // 回复OK
-
+				NVIC_SystemReset();
         Now_NetDevParameter.NowTCPLinkFlag = false;
     }
     // 功能三：读工作模式
