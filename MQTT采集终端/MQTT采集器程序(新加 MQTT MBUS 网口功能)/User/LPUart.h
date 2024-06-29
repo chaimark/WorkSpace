@@ -1,15 +1,16 @@
 #ifndef __LPUarT_H
 #define __LPUarT_H
+#include <stdint.h>
 
-#define  LPUARTMAX  250
+#define  LPUARTMAX  1024
 typedef struct {
 	unsigned char TxBuf[LPUARTMAX];
-	unsigned char TxLen;
-	unsigned char TxOpc;
+	uint16_t TxLen;
+	uint16_t TxOpc;
 	unsigned char RxBuf[LPUARTMAX];
-	unsigned char RxLen;
-	unsigned char RxOpc;
-	unsigned char Rxdata;
+	uint16_t RxLen;
+	uint16_t RxOpc;
+	uint16_t Rxdata;
 }LPUARTOpTypeDef;
 
 extern unsigned char CH340_LPUART1_RX_Count_Above30;

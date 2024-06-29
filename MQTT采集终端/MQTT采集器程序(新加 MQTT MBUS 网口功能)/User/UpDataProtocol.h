@@ -4,7 +4,7 @@
 #include "main.h"
 #include "AT24C0256.h"
 
-#define CONSOLE_UART  UART4
+#define CONSOLE_UART  UART5
 #define CONSOLE_BUF_SIZE 1024  
 #define CONSOLE_NEED_BUF       // 需要命令缓存，上下可切换  // 640 Byte
 #define CONSOLE_BUF_NUM    10  // 缓存条数

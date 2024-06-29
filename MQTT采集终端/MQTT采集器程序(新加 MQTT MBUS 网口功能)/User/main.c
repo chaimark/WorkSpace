@@ -192,7 +192,7 @@ int main(void) {
     MF_Clock_Init();
     /* Initialize FL Driver Library */
     FL_Init();
-    /* Initialize all configured peripherals */
+    /* Initialize all configured peripherals */                              
     MF_Config_Init();
     BSTIM_10mS_Enable();
     FL_IWDT_ReloadCounter(IWDT); // 喂狗

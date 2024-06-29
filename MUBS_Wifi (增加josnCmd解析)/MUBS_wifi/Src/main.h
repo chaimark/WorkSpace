@@ -108,7 +108,7 @@ extern "C"
 }
 #endif
 
-extern void copyDataForUART(void);
+
 extern void IWDT_Clr(void);
 extern void BSTIM_Init(uint16_t ms);
 extern void wifi_task(void);
