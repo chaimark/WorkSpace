@@ -1,4 +1,4 @@
-c_cpp_properties.json
+
 *.exe
 *.EDZ
 *.dep
@@ -45,3 +45,4 @@ c_cpp_properties.json
 !M0_WebPage-20240416150814.rar
 !PCB library file.zip
 EthernetTool_V1.3.4.zip
+

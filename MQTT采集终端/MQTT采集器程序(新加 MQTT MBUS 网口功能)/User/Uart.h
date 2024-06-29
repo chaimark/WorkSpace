@@ -1,16 +1,16 @@
 #ifndef __UarT_H
 #define __UarT_H
 
-#define UARTMAX   250
+#define UARTMAX   600
 #define UART0_MAX   1024
 #include <stdint.h>
 
 typedef struct {
 	unsigned char TxBuf[UARTMAX];
-	unsigned char TxLen;
+	uint16_t TxLen;
 	unsigned char TxOpc;
 	unsigned char RxBuf[UARTMAX];
-	unsigned char RxLen;
+	uint16_t RxLen;
 	unsigned char RxOpc;
 	unsigned char Rxdata;
 }UARTOpStruct;
@@ -39,9 +39,6 @@ extern void Clear_UART4_Data(void);
 extern void Clear_LPUART0_Data(void);
 extern void Send_Command_InMain_By_UART(unsigned char port);
 extern void Adjust_Meter_By_MBUS_Uart1(void);
-extern void CH340_UART4_Send_Buffer(char* data, unsigned int len);
-
-
 
 #endif 
 
