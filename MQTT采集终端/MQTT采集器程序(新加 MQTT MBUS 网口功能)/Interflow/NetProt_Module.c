@@ -188,7 +188,7 @@ void MQTT_NET_10mS_Timers_Add(void) {
 // 搬运串口数据
 bool copyDataForUART(void) {
     if (UART0Ddata.RxLen != 0) {
-        // NVIC_DisableIRQ(UART0_IRQn); // 关闭中断使能
+        NVIC_DisableIRQ(UART0_IRQn); // 关闭中断使能
         if (Now_NetDevParameter.NetDataBuff_NowLen + UART0Ddata.RxLen <= ARR_SIZE(Now_NetDevParameter.NetDataBuff)) { // 追加到 Now_NetDevParameter.NetDataBuff
             memcpy(&Now_NetDevParameter.NetDataBuff[Now_NetDevParameter.NetDataBuff_NowLen], (char *)UART0Ddata.RxBuf, UART0Ddata.RxLen); // 接收数据
             Now_NetDevParameter.NetDataBuff_NowLen += UART0Ddata.RxLen;
@@ -198,7 +198,7 @@ bool copyDataForUART(void) {
             Now_NetDevParameter.NetDataBuff_NowLen = UART0Ddata.RxLen;
         }
         UART0Ddata.RxLen = 0;
-        // NVIC_EnableIRQ(UART0_IRQn); // 开启中断使能
+        NVIC_EnableIRQ(UART0_IRQn); // 开启中断使能
         return true;
     } else {
         return false;
@@ -244,7 +244,7 @@ bool SetDevATCMDModel_ThroughSendData(void) {
 }
 // AT 参数初始化
 void setNetArgumentInit(void) {
-    Now_NetDevParameter.MQTT_NET_Receive_checkTime = 1;
+    Now_NetDevParameter.MQTT_NET_Receive_checkTime = 5;
     return;
 }
 void ClearNetDataBuff(void) {

@@ -258,15 +258,22 @@ void UART5_IRQHandler(void) {
 //	}
 }
 //搬运串口数据 
-void copyDataForUART(void) {
-    NVIC_DisableIRQ(UART0_IRQn);	//关闭中断使能
-    if (HTTPBuff_NowLen + UART0Ddata.RxLen <= HTTPBuff_MaxLen) {
-        HTTPBuff_NowLen = CatString(HTTPBuff_p, (char *)UART0Ddata.RxBuf, HTTPBuff_MaxLen, UART0Ddata.RxLen);	//追加到 HTTPBuff_p	
+
+bool copyDataForUART(void) {
+    if (UART0Ddata.RxLen != 0) {
+        NVIC_DisableIRQ(UART0_IRQn); // 关闭中断使能
+        if (HTTPBuff_NowLen + UART0Ddata.RxLen <= WIFI_BUFF_MAXLEN) { // 追加到 Now_NetDevParameter.NetDataBuff
+            memcpy(&HTTPBuff_p[HTTPBuff_NowLen], (char *)UART0Ddata.RxBuf, UART0Ddata.RxLen); // 接收数据
+            HTTPBuff_NowLen += UART0Ddata.RxLen;
+        } else {
+            memset(HTTPBuff_p, 0, WIFI_BUFF_MAXLEN);						// 释放 HTTPBuff_p
+            memcpy(HTTPBuff_p, (char *)UART0Ddata.RxBuf, UART0Ddata.RxLen); // 接收数据
+            HTTPBuff_NowLen = UART0Ddata.RxLen;
+        }
+        UART0Ddata.RxLen = 0;
+        NVIC_EnableIRQ(UART0_IRQn); // 开启中断使能
+        return true;
     } else {
-        memset(HTTPBuff_p, 0, HTTPBuff_MaxLen);   								//释放 HTTPBuff_p	
-        CopyString(HTTPBuff_p, (char *)UART0Ddata.RxBuf, HTTPBuff_MaxLen, UART0Ddata.RxLen);		//接收数据
-        HTTPBuff_NowLen = UART0Ddata.RxLen;
+        return false;
     }
-    UART0Ddata.RxLen = 0;
-    NVIC_EnableIRQ(UART0_IRQn);  	//开启中断使能
 }
