@@ -397,8 +397,7 @@ void JSON_Send_Main_Copy_Meter_Data(unsigned char id, unsigned char * addr, unsi
     sprintf(temp_char, "%01x%02x%02x%02x%02x%02x%02x", addr[0], addr[1], addr[2], addr[3], addr[4], addr[5], addr[6]);
     JSON_Send_Add_Item(&json_matching.meter_id, temp_char);
     strcat(JSON_TTL_Buff, "\"meter_data\":[\"");
-    HEX2ToASCII((char *)data, lentgh, temp_char, 270);
-    temp_char[lentgh*2] = '\0';
+    HEX2ToASCII((char *)data, lentgh, temp_char, (lentgh*2));
     strcat(JSON_TTL_Buff, temp_char);
     strcat(JSON_TTL_Buff, "\",");
     JSON_Send_Add_End_Func();
@@ -415,8 +414,7 @@ void JSON_Send_Immediately_Main_Copy_Meter_Data(unsigned char id, unsigned char 
     JSON_Send_Add_Begin(id);
     JSON_Send_Add_Item(&json_matching.transparent_port, &port_num);
     strcat(JSON_TTL_Buff, "\"meter_data\":[\"");
-    HEX2ToASCII((char *)data, lentgh, temp_char, 240);
-    temp_char[lentgh*2] = '\0';
+     HEX2ToASCII((char *)data, lentgh, temp_char, (lentgh*2));
     strcat(JSON_TTL_Buff, temp_char);
     strcat(JSON_TTL_Buff, "\",");
     JSON_Send_Add_End_Func();
