@@ -212,7 +212,7 @@ int main(void) {
     Read_EEprom_Or_RX8025T_To_Set_RTC();
     MBUS_OUT_OFF;
     Test_LED_Twinkle();
-    Set_GATEWAY_Working_Mode_From_Buffer_To_AT256(Default_Working_Mode);
+    // Set_GATEWAY_Working_Mode_From_Buffer_To_AT256(Default_Working_Mode);
     Set_GetWay_WorkingMode(); // 必须初始化设备
     if (DOWN_Mode_MBUS_ON == 1) {
         MF_NVIC_UART1_Init();
