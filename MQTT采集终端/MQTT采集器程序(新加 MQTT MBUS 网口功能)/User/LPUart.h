@@ -3,14 +3,15 @@
 #include <stdint.h>
 
 #define  LPUARTMAX  1024
+
 typedef struct {
 	unsigned char TxBuf[LPUARTMAX];
 	uint16_t TxLen;
-	uint16_t TxOpc;
+	unsigned char TxOpc;
 	unsigned char RxBuf[LPUARTMAX];
 	uint16_t RxLen;
-	uint16_t RxOpc;
-	uint16_t Rxdata;
+	unsigned char RxOpc;
+	unsigned char Rxdata;
 }LPUARTOpTypeDef;
 
 extern unsigned char CH340_LPUART1_RX_Count_Above30;
