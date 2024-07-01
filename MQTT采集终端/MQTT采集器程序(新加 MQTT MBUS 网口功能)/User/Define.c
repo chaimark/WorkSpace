@@ -4,7 +4,7 @@ int UART0_BAND = 115200;
 unsigned int Current_MBUS_MV_Value = 0;
 unsigned int Current_MBUS_MA_Value = 0;
 unsigned char current_GW_model = 0x00;
-unsigned char Default_Working_Mode = 0x48;
+unsigned char Default_Working_Mode = 0x08;
 const unsigned char HasRX8025T = 0;
 const unsigned char SOFT_VERSION = 10;  // 10:V1.0
 

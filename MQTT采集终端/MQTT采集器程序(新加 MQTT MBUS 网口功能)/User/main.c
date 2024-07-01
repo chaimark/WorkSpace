@@ -139,10 +139,10 @@ void Set_GetWay_WorkingMode(void) {
     RS485_LED_L;
     ERR_LED_L;
 
-    EEprom_MQTT_Parameter_Init();
-    Read_MBUS_Buad_Local_From_AT256_To_ARM();
-    Read_RS4851_Buad_Local_From_AT256_To_ARM();
-    Read_RS4852_Buad_Local_From_AT256_To_ARM();
+//    EEprom_MQTT_Parameter_Init();
+//    Read_MBUS_Buad_Local_From_AT256_To_ARM();
+//    Read_RS4851_Buad_Local_From_AT256_To_ARM();
+//    Read_RS4852_Buad_Local_From_AT256_To_ARM();
 
     if (UP_Mode_EC20_ON == 1) {
         EC20_Uart0_Init();
@@ -212,7 +212,7 @@ int main(void) {
     Read_EEprom_Or_RX8025T_To_Set_RTC();
     MBUS_OUT_OFF;
     Test_LED_Twinkle();
-    // Set_GATEWAY_Working_Mode_From_Buffer_To_AT256(Default_Working_Mode);
+    Set_GATEWAY_Working_Mode_From_Buffer_To_AT256(Default_Working_Mode);
     Set_GetWay_WorkingMode(); // 必须初始化设备
     if (DOWN_Mode_MBUS_ON == 1) {
         MF_NVIC_UART1_Init();
