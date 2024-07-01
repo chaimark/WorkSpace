@@ -739,6 +739,124 @@ void Modfiy_Parameter_By_CH340(void) {
         EEprom_JSON_Write(&AT24CXX_Manager.Save_Working_Mode, 1);
         RTC_NET_RST_Count = 180; //
     }
+    // 功能二：USB 透传 MUBS： USB临时串口MBUS
+    if (LPUART1Ddata.RxBuf[2] == 0xDB) {
+        // current_MBUS_OFF_2S_Count=5;
+        VBAT_29302_CTL_OFF; 
+        V33_PWR_CTL_OFF;	
+        MBUS_OUT_OFF;
+        Select_OFF_EC20_To_UART0;
+        Select_OFF_NET_To_UART0;
+
+        Select_OFF_MBUS_To_UART1;
+        Select_OFF_RS4851_To_UART4;
+        Select_OFF_RS4852_To_LPUART0;
+        Select_OFF_WIR_To_UART1;
+
+        Select_OFF_CH340_To_LPUART1;
+        Select_OFF_CH340_To_MBUS;
+        Select_OFF_CH340_To_RS4851;
+        Select_OFF_CH340_To_RS4852;
+
+        Heart_LED_L;
+        EC20_LED_L;
+        NET_LED_L;
+        CH340_To_LED_L;
+        WIR_LED_L;
+        RS485_LED_L;
+        ERR_LED_L;
+
+        Select_ON_CH340_To_MBUS;
+        MBUS_OUT_ON;
+        UP_Mode_EC20_ON = 0;
+        UP_Mode_NET_ON = 0;
+        UP_Mode_MBUSTOUSB_ON = 0;
+        UP_Mode_WIR_ON = 0;
+        DOWN_Mode_MBUS_ON = 1;
+        DOWN_Mode_RS485_ON = 0;
+        DOWN_Mode_WIR_ON = 0;
+        DEFINE_Mode_SETUSB_ON = 0;
+
+        CH340_To_LED_H;
+    }
+    // 功能二：USB 透传 RS4851：USB临时串口RS4851
+    if (LPUART1Ddata.RxBuf[2] == 0xB2) {
+        // current_MBUS_OFF_2S_Count=5;
+        VBAT_29302_CTL_OFF; 
+        V33_PWR_CTL_OFF;	
+        MBUS_OUT_OFF;
+        Select_OFF_EC20_To_UART0;
+        Select_OFF_NET_To_UART0;
+
+        Select_OFF_MBUS_To_UART1;
+        Select_OFF_RS4851_To_UART4;
+        Select_OFF_RS4852_To_LPUART0;
+        Select_OFF_WIR_To_UART1;
+
+        Select_OFF_CH340_To_LPUART1;
+        Select_OFF_CH340_To_MBUS;
+        Select_OFF_CH340_To_RS4851;
+        Select_OFF_CH340_To_RS4852;
+
+        Heart_LED_L;
+        EC20_LED_L;
+        NET_LED_L;
+        CH340_To_LED_L;
+        WIR_LED_L;
+        RS485_LED_L;
+        ERR_LED_L;
+        
+        Select_ON_CH340_To_RS4851;
+        UP_Mode_EC20_ON = 0;
+        UP_Mode_NET_ON = 0;
+        UP_Mode_MBUSTOUSB_ON = 0;
+        UP_Mode_WIR_ON = 0;
+        DOWN_Mode_MBUS_ON = 0;
+        DOWN_Mode_RS485_ON = 1;
+        DOWN_Mode_WIR_ON = 0;
+        DEFINE_Mode_SETUSB_ON = 0;
+        CH340_To_LED_H;
+        RS485_LED_H;
+    }
+    // 功能二：USB 透传 RS4852： USB临时串口RS4852
+    if (LPUART1Ddata.RxBuf[2] == 0xB3) {
+        // current_MBUS_OFF_2S_Count=5;
+        VBAT_29302_CTL_OFF; 
+        V33_PWR_CTL_OFF;	
+        MBUS_OUT_OFF;
+        Select_OFF_EC20_To_UART0;
+        Select_OFF_NET_To_UART0;
+
+        Select_OFF_MBUS_To_UART1;
+        Select_OFF_RS4851_To_UART4;
+        Select_OFF_RS4852_To_LPUART0;
+        Select_OFF_WIR_To_UART1;
+
+        Select_OFF_CH340_To_LPUART1;
+        Select_OFF_CH340_To_MBUS;
+        Select_OFF_CH340_To_RS4851;
+        Select_OFF_CH340_To_RS4852;
+
+        Heart_LED_L;
+        EC20_LED_L;
+        NET_LED_L;
+        CH340_To_LED_L;
+        WIR_LED_L;
+        RS485_LED_L;
+        ERR_LED_L;
+
+        Select_ON_CH340_To_RS4852;
+        UP_Mode_EC20_ON = 0;
+        UP_Mode_NET_ON = 0;
+        UP_Mode_MBUSTOUSB_ON = 0;
+        UP_Mode_WIR_ON = 0;
+        DOWN_Mode_MBUS_ON = 0;
+        DOWN_Mode_RS485_ON = 1;
+        DOWN_Mode_WIR_ON = 0;
+        DEFINE_Mode_SETUSB_ON = 0;
+        CH340_To_LED_H;
+        RS485_LED_H;
+    }
 
     // ？？？未核查
     if (LPUART1Ddata.RxBuf[2] == 0xDA) {
@@ -782,137 +900,5 @@ void Modfiy_Parameter_By_CH340(void) {
         // Set_NET_Local_IMEI_From_Buffer_To_AT256(Temp_Buffer);
         // Read_NET_Local_IMEI_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
-    }
-    // 功能二：USB 透传 MUBS： USB临时串口
-    if (LPUART1Ddata.RxBuf[2] == 0xDB) {
-        // current_MBUS_OFF_2S_Count=5;
-        VBAT_29302_CTL_OFF; //
-        V33_PWR_CTL_OFF;	//
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_ON_CH340_To_MBUS;
-        FL_DelayMs(200);
-        Select_ON_CH340_To_MBUS;
-        FL_DelayMs(200);
-        UP_Mode_EC20_ON = 0;
-        UP_Mode_NET_ON = 0;
-        UP_Mode_MBUSTOUSB_ON = 1;
-        UP_Mode_WIR_ON = 0;
-        DOWN_Mode_MBUS_ON = 1;
-        DOWN_Mode_RS485_ON = 0;
-        DOWN_Mode_WIR_ON = 0;
-        DEFINE_Mode_SETUSB_ON = 0;
-
-        Heart_LED_L;
-        EC20_LED_L;
-        NET_LED_L;
-        CH340_To_MBUS_LED_L;
-        WIR_LED_L;
-        RS485_LED_L;
-        CH340_To_MBUS_LED_H;
-    }
-    // 功能二：USB 透传 RS4851：USB临时串口
-    if (LPUART1Ddata.RxBuf[2] == 0xB2) {
-        // current_MBUS_OFF_2S_Count=5;
-        VBAT_29302_CTL_OFF; //
-        V33_PWR_CTL_OFF;	//
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_ON_CH340_To_MBUS;
-        FL_DelayMs(200);
-        Select_ON_CH340_To_MBUS;
-        FL_DelayMs(200);
-        UP_Mode_EC20_ON = 0;
-        UP_Mode_NET_ON = 0;
-        UP_Mode_MBUSTOUSB_ON = 1;
-        UP_Mode_WIR_ON = 0;
-        DOWN_Mode_MBUS_ON = 1;
-        DOWN_Mode_RS485_ON = 0;
-        DOWN_Mode_WIR_ON = 0;
-        DEFINE_Mode_SETUSB_ON = 0;
-
-        Heart_LED_L;
-        EC20_LED_L;
-        NET_LED_L;
-        CH340_To_MBUS_LED_L;
-        WIR_LED_L;
-        RS485_LED_L;
-        CH340_To_MBUS_LED_H;
-    }
-    // 功能二：USB 透传 RS4852： USB临时串口
-    if (LPUART1Ddata.RxBuf[2] == 0xB3) {
-        // current_MBUS_OFF_2S_Count=5;
-        VBAT_29302_CTL_OFF; //
-        V33_PWR_CTL_OFF;	//
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_OFF_MBUS_To_UART1;
-        FL_DelayMs(200);
-        Select_OFF_CH340_To_LPUART1;
-        FL_DelayMs(200);
-        V33_PWR_CTL_OFF;
-        FL_DelayMs(200);
-        Select_ON_CH340_To_MBUS;
-        FL_DelayMs(200);
-        Select_ON_CH340_To_MBUS;
-        FL_DelayMs(200);
-        UP_Mode_EC20_ON = 0;
-        UP_Mode_NET_ON = 0;
-        UP_Mode_MBUSTOUSB_ON = 1;
-        UP_Mode_WIR_ON = 0;
-        DOWN_Mode_MBUS_ON = 1;
-        DOWN_Mode_RS485_ON = 0;
-        DOWN_Mode_WIR_ON = 0;
-        DEFINE_Mode_SETUSB_ON = 0;
-
-        Heart_LED_L;
-        EC20_LED_L;
-        NET_LED_L;
-        CH340_To_MBUS_LED_L;
-        WIR_LED_L;
-        RS485_LED_L;
-        CH340_To_MBUS_LED_H;
     }
 }

@@ -57,8 +57,8 @@
 #define NET_LED_H FL_GPIO_SetOutputPin(GPIOC, FL_GPIO_PIN_11) // PC11
 #define NET_LED_L FL_GPIO_ResetOutputPin(GPIOC, FL_GPIO_PIN_11)
 
-#define CH340_To_MBUS_LED_H FL_GPIO_SetOutputPin(GPIOC, FL_GPIO_PIN_12) // PC12
-#define CH340_To_MBUS_LED_L FL_GPIO_ResetOutputPin(GPIOC, FL_GPIO_PIN_12)
+#define CH340_To_LED_H FL_GPIO_SetOutputPin(GPIOC, FL_GPIO_PIN_12) // PC12
+#define CH340_To_LED_L FL_GPIO_ResetOutputPin(GPIOC, FL_GPIO_PIN_12)
 
 #define WIR_LED_H FL_GPIO_SetOutputPin(GPIOB, FL_GPIO_PIN_11) // PB11
 #define WIR_LED_L FL_GPIO_ResetOutputPin(GPIOB, FL_GPIO_PIN_11)

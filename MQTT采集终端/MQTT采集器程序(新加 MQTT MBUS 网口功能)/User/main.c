@@ -27,7 +27,7 @@ void Test_LED_Twinkle() {
         Heart_LED_H;
         EC20_LED_H;
         NET_LED_H;
-        CH340_To_MBUS_LED_H;
+        CH340_To_LED_H;
         WIR_LED_H;
         RS485_LED_H;
         ERR_LED_H;
@@ -35,7 +35,7 @@ void Test_LED_Twinkle() {
         Heart_LED_L;
         EC20_LED_L;
         NET_LED_L;
-        CH340_To_MBUS_LED_L;
+        CH340_To_LED_L;
         WIR_LED_L;
         RS485_LED_L;
         ERR_LED_L;
@@ -134,7 +134,7 @@ void Set_GetWay_WorkingMode(void) {
     Heart_LED_L;
     EC20_LED_L;
     NET_LED_L;
-    CH340_To_MBUS_LED_L;
+    CH340_To_LED_L;
     WIR_LED_L;
     RS485_LED_L;
     ERR_LED_L;
