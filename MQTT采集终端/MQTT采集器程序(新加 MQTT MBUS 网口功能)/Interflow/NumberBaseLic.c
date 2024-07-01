@@ -209,7 +209,7 @@ int64_t doneAsciiStrToAnyBaseNumberData(char AscArray[], int ArrayLen, int Outpu
     return NumTemp;
 }
 // 任意进制数 转 字符串
-int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase) {  
+int doneBaseNumberDataToAsciiStr(char AscArray[], int ArrayLen, int NumberData, int IntputBase) {
     uint64_t TempNum = anyBaseToAnyBase(NumberData, IntputBase, 10);                    // 先转到 10进制
     int AscArrayLen = anyBaseNumberToSameArray((uint8_t *)AscArray, ArrayLen, TempNum); // 10进制 转对应数组
     numberArrayToStrArray(AscArray, AscArray, AscArrayLen);                             // 数组串 转 字符串

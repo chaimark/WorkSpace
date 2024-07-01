@@ -874,31 +874,12 @@ void Modfiy_Parameter_By_CH340(void) {
             Temp_Buffer[i] = '\0';
         }
 
-        // uint16_t Len = ((LPUART1Ddata.RxBuf[4] << 8) & LPUART1Ddata.RxBuf[3]);
-        // // 回复
-        // Temp_Buffer[0] = 0X00;
-        // for (i = 0; i <= Len; i++)
-        // {
-        // 	if (i < Len)
-        // 	{
-        // 		Temp_Buffer[i + 1] = LPUART1Ddata.RxBuf[i + 4];
-        // 	}
-        // 	else
-        // 	{
-        // 		Temp_Buffer[i] = '\0';
-        // 	}
-        // }
 
         LPUART1Ddata.TxBuf[0] = 'O';
         LPUART1Ddata.TxBuf[1] = 'K';
         if (DEFINE_Mode_SETUSB_ON == 1)
             LPUart1Send(LPUART1Ddata.TxBuf, 2); // OK
-
-        // ASCIIToHEX2(Temp_Buffer, AT24CXX_Manager.gw_id, 5);
-        // EEprom_JSON_Write((unsigned char *)(&AT24CXX_Manager.gw_id), 6);
-
-        // Set_NET_Local_IMEI_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_NET_Local_IMEI_From_AT256_To_ARM();
+            
         RTC_NET_RST_Count = 180; //
     }
 }
