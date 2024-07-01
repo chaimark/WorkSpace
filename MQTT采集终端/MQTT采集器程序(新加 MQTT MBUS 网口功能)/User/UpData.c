@@ -92,8 +92,8 @@ int UpData_Receive_Hex(unsigned short int num_row, unsigned char * buf, unsigned
     char * p_end;
     char * p = (char *)buf;
     buf[len] = 0;
-    unsigned short int lineLen;
-    unsigned short int addr;
+    int lineLen = 0;
+    unsigned short int addr = NULL;
     unsigned char isFinished = 0;
     unsigned short int line_num = 0;
     while (line_num < num_row) {
@@ -120,10 +120,7 @@ int UpData_Receive_Hex(unsigned short int num_row, unsigned char * buf, unsigned
             return -1;
         }
 
-        // 转化
-        lineLen >>= 1;
-        #warning "quiz ASCIIToHEX2";
-        if (ASCIIToHEX2((char *)p_begin,strlen((char *)p_begin), (char *)UpData_Line, lineLen) < 0) {
+        if ((lineLen = ASCIIToHEX2((char *)p_begin, lineLen, (char *)UpData_Line, ARR_SIZE(UpData_Line))) < 0) {
             printf("updata data err\r\n");
             return -1;
         }
