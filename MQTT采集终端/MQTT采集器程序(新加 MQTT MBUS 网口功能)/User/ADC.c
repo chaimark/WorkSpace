@@ -75,7 +75,7 @@ unsigned int Test_Current_Voltge_mV(void) {
 	unsigned int ADC_DATA;
 	unsigned char i;
 	ADC_DATA = 0;
-	for (i = 0;i < 20;i++) ADC_DATA += GetSingleChannelVoltage_POLL(FL_ADC_EXTERNAL_CH4);
+	for (i = 0;i < 20;i++) ADC_DATA += GetSingleChannelVoltage_POLL(FL_ADC_EXTERNAL_CH2);
 	ADC_DATA = ADC_DATA / 20;
 	return ADC_DATA * 11;
 }

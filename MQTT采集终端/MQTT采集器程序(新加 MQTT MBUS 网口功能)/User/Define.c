@@ -26,7 +26,7 @@ unsigned char  UP_Mode_NET_ON = 1;
 unsigned char  UP_Mode_MBUSTOUSB_ON = 0;
 
 unsigned char  UP_Mode_WIR_ON = 0;
-
+unsigned char  DUBG_Mode_WIFI_ON = 1;
 unsigned char  DOWN_Mode_MBUS_ON = 1;
 unsigned char  DOWN_Mode_RS4851_ON = 1;
 unsigned char  DOWN_Mode_RS4852_ON = 1;

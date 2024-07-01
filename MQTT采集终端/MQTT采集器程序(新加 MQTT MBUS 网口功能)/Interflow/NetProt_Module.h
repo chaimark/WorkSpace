@@ -22,6 +22,5 @@ extern NetDevParameter Now_NetDevParameter;
 extern void MOTT_Net_Task(void);
 extern bool copyDataForUART(void);
 extern void MQTT_NET_10mS_Timers_Add(void);
-extern void MQTT_NetProt_Init(void);
 extern void ClearNetDataBuff(void);
 #endif

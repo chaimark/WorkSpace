@@ -204,49 +204,6 @@ bool copyDataForUART(void) {
         return false;
     }
 }
-void MQTT_NetProt_Init(void) {
-    // EC20_WAKEUP_IN_L;
-    // NET_CFG_ON;
-    V33_PWR_CTL_ON;
-    NET_RST_OFF;
-    FL_DelayMs(500); // 延时等待重启结束
-    NET_RST_ON;
-
-    // 寻找正确的band
-    // int Count = 0;
-    // int TempBand[3] = {2400, 9600, 115200};
-    // for (Count = 0; Count < 3; Count++)
-    // {
-    // 	Select_OFF_NET_To_UART0;
-    // 	UART0_BAND = TempBand[Count];
-    // 	MF_NET_To_UART0_Init(); // 以太网
-    // 	MF_NET_To_UART0_Interrupt_Init();
-    // 	Select_ON_NET_To_UART0;
-    //  ClearNetDataBuff();	// 释放 HTTPBuff_p
-    // 	FL_DelayMs(500);
-    // 	sendDataByNetProt("+++", 3);
-    // 	if (copyDataForUART())
-    // 	{
-    // 		if (myStrstr(Now_NetDevParameter.NetDataBuff, "a", Now_NetDevParameter.NetDataBuff_NowLen) != NULL)
-    // 		{
-    // 			UART0_BAND = TempBand[Count];
-    // 			MF_NET_To_UART0_Init();
-    // 			break;
-    // 		}
-    // 	}
-    // }
-    // if (Count >= 3)
-    // {
-    // 		Select_OFF_NET_To_UART0;
-    // 		UART0_BAND = 9600;
-    // 		MF_NET_To_UART0_Init(); // 以太网
-    // 		MF_NET_To_UART0_Interrupt_Init();
-    // 		Select_ON_NET_To_UART0;
-    // }
-
-    MQTT_NetAT_Init();
-    return;
-}
 
 // 设置模组处于AT模式
 bool SetDevATCMDModel_ThroughSendData(void) {

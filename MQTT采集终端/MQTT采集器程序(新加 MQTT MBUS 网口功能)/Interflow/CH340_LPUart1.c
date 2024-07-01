@@ -104,20 +104,6 @@ void Modfiy_Parameter_By_CH340(void) {
         }
         swapStr((char *)AT24CXX_Manager.gw_id, 6);
         EEprom_JSON_Write((unsigned char *)(&AT24CXX_Manager.gw_id), 6);
-
-        // for (i = 0; i <= Readlen; i++)
-        // {
-        // 	if (i < Readlen)
-        // 	{
-        // 		Temp_Buffer[i] = LPUART1Ddata.RxBuf[i + 4];
-        // 	}
-        // 	else
-        // 	{
-        // 		Temp_Buffer[i] = '\0';
-        // 	}
-        // }
-        // Set_EC20_Local_IMEI_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_EC20_Local_IMEI_From_AT256_To_ARM();
         RTC_EC20_RST_Count = 180; //
     }
     // 功能一: 修改 IP and Prot
@@ -168,9 +154,6 @@ void Modfiy_Parameter_By_CH340(void) {
 
         AT24CXX_Manager.NET_Remote_Port = doneAsciiStrToAnyBaseNumberData(AddrStart, IpOrProtLen, 16);
         EEprom_JSON_Write((unsigned char *)(&AT24CXX_Manager.NET_Remote_Port), 2);
-
-        // Set_EC20_Remote_QIOPEN_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_EC20_Remote_QIOPEN_From_AT256_To_ARM();
         RTC_EC20_RST_Count = 180; //
     }
     // 功能一：读取网关标识 68 48 FE 0503901F 6516
@@ -573,9 +556,6 @@ void Modfiy_Parameter_By_CH340(void) {
             }
         }
     next2:
-
-        // Set_NET_Local_IP_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_NET_Local_IP_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
     }
     // 功能二：修改 LocaMASK
@@ -610,8 +590,6 @@ void Modfiy_Parameter_By_CH340(void) {
             }
         }
     next3:
-        // Set_NET_Local_MASK_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_NET_Local_MASK_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
     }
     // 功能二：修改 Loca网关
@@ -649,8 +627,6 @@ void Modfiy_Parameter_By_CH340(void) {
             }
         }
     next4:
-        // Set_NET_Local_GATEWAY_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_NET_Local_GATEWAY_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
     }
     // 功能二：修改 RemoteIP
@@ -684,8 +660,6 @@ void Modfiy_Parameter_By_CH340(void) {
             }
         }
     next6:
-        // Set_NET_Remote_IP_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_NET_Remote_IP_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
     }
     // 功能二：修改 Remote端口
@@ -721,8 +695,6 @@ void Modfiy_Parameter_By_CH340(void) {
             }
         }
     next7:
-        // Set_NET_Remote_Port_From_Buffer_To_AT256(Temp_Buffer);
-        // Read_NET_Remote_Port_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
     }
     // 功能三：MCU 重启
@@ -765,9 +737,6 @@ void Modfiy_Parameter_By_CH340(void) {
         // 保存
         AT24CXX_Manager.Save_Working_Mode = LPUART1Ddata.RxBuf[4];
         EEprom_JSON_Write(&AT24CXX_Manager.Save_Working_Mode, 1);
-
-        // Set_GATEWAY_Working_Mode_From_Buffer_To_AT256(LPUART1Ddata.RxBuf[4]);
-        // Read_GATEWAY_Working_Mode_From_AT256_To_ARM();
         RTC_NET_RST_Count = 180; //
     }
 
