@@ -227,6 +227,7 @@ void HEX2ToASCII(char * hex, int hex_len, char * asc, int asc_len) {
     IDStr.MaxLen = asc_len;
     shortChStrToDoubleChStr(IDHex, IDStr);// 单字节数组 转 双字节数组 0x23 --> 0x02 0x03
     numberArrayToStrArray(IDStr.Name._char, IDStr.Name._char, IDStr.MaxLen);// 将数组串转字符串
+    IDStr.Name._char[2 * IDHex.MaxLen] = '\0';
     // HEX TO STR-------------------
 }
 
@@ -239,7 +240,9 @@ int ASCIIToHEX2(char * asc, int asc_len, char * hex, int hex_len) {
     IDStr.MaxLen = asc_len;
     IDHex.Name._char = hex;
     IDHex.MaxLen = hex_len;
-    strArrayToNumberArray(IDStr.Name._char, IDStr.Name._char, asc_len); // 将字符串转数组串
-    return doubleChStrToShortChStr(IDStr, IDHex);// 双字节数组 转 单字节数组 0x02 0x03 --> 0x23
+    strArrayToNumberArray(IDStr.Name._char, IDStr.Name._char, IDStr.MaxLen); // 将字符串转数组串
+    int Len = doubleChStrToShortChStr(IDStr, IDHex);// 双字节数组 转 单字节数组 0x02 0x03 --> 0x23
+    numberArrayToStrArray(IDStr.Name._char, IDStr.Name._char, IDStr.MaxLen); // 将数组串转字符串
+    return Len;
     // STR TO HEX-------------------
 }
