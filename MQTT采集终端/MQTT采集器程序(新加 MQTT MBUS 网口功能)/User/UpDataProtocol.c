@@ -343,13 +343,6 @@ void console_task(void) {
     }
 }
 
-void console_init(void) {
-    printf("\r\n/** console app begin **/\r\n");
-    Console_buf_clean();
-    console_reset();
-}
-
-
 // *****************************************************
 #define PROTOCOL_BEGIN			  0x7E // 包头
 #define PROTOCOL_DATABEG          0x02 // 数据开始

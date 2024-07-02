@@ -206,8 +206,6 @@ int main(void) {
     BSTIM_10mS_Enable();
     FL_IWDT_ReloadCounter(IWDT); // 喂狗
     // 功能初始化
-    //	Gpio_Init();
-    //	console_init();
     //	RTC_Init_By_RX8025T(); // 用外部时钟，刷新内部时钟
     Read_EEprom_Or_RX8025T_To_Set_RTC();
     MBUS_OUT_OFF;
