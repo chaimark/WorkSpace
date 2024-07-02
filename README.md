@@ -29,6 +29,6 @@ git commit -m "massage" <br>
 ### 推送文件到 github 仓库
 git push -u WorkSpace main:main <br>
 ### 新建分支
-git branch master<branch-name> <br>
+git branch master <br>
 ### 切换到新建的分支
-git checkout master<branch-name> <br>
+git checkout master <br>
