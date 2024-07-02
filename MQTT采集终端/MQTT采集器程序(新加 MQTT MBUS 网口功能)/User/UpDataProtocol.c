@@ -38,16 +38,6 @@ static int8_t console_his_r;
 static int8_t console_his_w;
 #endif
 
-static void Console_buf_clean(void) {
-#ifdef CONSOLE_NEED_BUF   
-    int8_t i;
-    console_his_r = 0;
-    console_his_w = 0;
-    for (i = 0; i < CONSOLE_BUF_NUM; i++)
-        console_his[i][0] = 0;
-#endif
-}
-
 static void Console_buf_write(char * buf) {
 #ifdef CONSOLE_NEED_BUF   
     strcpy(console_his[console_his_w++], buf);
